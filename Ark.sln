@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C++ Express 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArkBin", "src\ArkBin\ArkBin.vcproj", "{B7104D76-9DBE-41BE-9E26-8F0FE2BC036E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{21E8525A-AD1A-45C8-B208-907B27ECE07E} = {21E8525A-AD1A-45C8-B208-907B27ECE07E}
+		{A5A988D6-0ECB-4951-A1E3-D04A301B8580} = {A5A988D6-0ECB-4951-A1E3-D04A301B8580}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDLGUIlib", "src\SDLGUIlib\SDLGUIlib.vcproj", "{A5A988D6-0ECB-4951-A1E3-D04A301B8580}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDLGUIlibTests", "src\SDLGUIlibTests\SDLGUIlibTests.vcproj", "{69BD7092-20E2-44CD-B1F8-5E8EFEFB7BEC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A5A988D6-0ECB-4951-A1E3-D04A301B8580} = {A5A988D6-0ECB-4951-A1E3-D04A301B8580}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArkLib", "src\ArkLib\ArkLib.vcproj", "{21E8525A-AD1A-45C8-B208-907B27ECE07E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArkLibTest", "src\ArkLibTest\ArkLibTest.vcproj", "{FF9BAD1C-5775-4A66-92B5-D91C16AFF29C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7104D76-9DBE-41BE-9E26-8F0FE2BC036E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B7104D76-9DBE-41BE-9E26-8F0FE2BC036E}.Debug|Win32.Build.0 = Debug|Win32
+		{B7104D76-9DBE-41BE-9E26-8F0FE2BC036E}.Release|Win32.ActiveCfg = Release|Win32
+		{B7104D76-9DBE-41BE-9E26-8F0FE2BC036E}.Release|Win32.Build.0 = Release|Win32
+		{A5A988D6-0ECB-4951-A1E3-D04A301B8580}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A5A988D6-0ECB-4951-A1E3-D04A301B8580}.Debug|Win32.Build.0 = Debug|Win32
+		{A5A988D6-0ECB-4951-A1E3-D04A301B8580}.Release|Win32.ActiveCfg = Release|Win32
+		{A5A988D6-0ECB-4951-A1E3-D04A301B8580}.Release|Win32.Build.0 = Release|Win32
+		{69BD7092-20E2-44CD-B1F8-5E8EFEFB7BEC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{69BD7092-20E2-44CD-B1F8-5E8EFEFB7BEC}.Debug|Win32.Build.0 = Debug|Win32
+		{69BD7092-20E2-44CD-B1F8-5E8EFEFB7BEC}.Release|Win32.ActiveCfg = Release|Win32
+		{69BD7092-20E2-44CD-B1F8-5E8EFEFB7BEC}.Release|Win32.Build.0 = Release|Win32
+		{21E8525A-AD1A-45C8-B208-907B27ECE07E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{21E8525A-AD1A-45C8-B208-907B27ECE07E}.Debug|Win32.Build.0 = Debug|Win32
+		{21E8525A-AD1A-45C8-B208-907B27ECE07E}.Release|Win32.ActiveCfg = Release|Win32
+		{21E8525A-AD1A-45C8-B208-907B27ECE07E}.Release|Win32.Build.0 = Release|Win32
+		{FF9BAD1C-5775-4A66-92B5-D91C16AFF29C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FF9BAD1C-5775-4A66-92B5-D91C16AFF29C}.Debug|Win32.Build.0 = Debug|Win32
+		{FF9BAD1C-5775-4A66-92B5-D91C16AFF29C}.Release|Win32.ActiveCfg = Release|Win32
+		{FF9BAD1C-5775-4A66-92B5-D91C16AFF29C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

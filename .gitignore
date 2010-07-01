@@ -1,0 +1,7 @@
+Ark.ncb
+Ark.suo
+bin/
+lib/
+obj/
+src/*/*.vcproj.*.*.user
+Thumbs.db
