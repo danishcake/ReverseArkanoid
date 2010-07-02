@@ -1151,12 +1151,22 @@ void Widget::DistributeSDLEvents(SDL_Event* event)
 
 	if(e.event_type == EventType::MouseMove)
 	{
+		bool move_handled = false;
 		for(vector<Widget*>::iterator it = all_.begin(); it != all_.end(); ++it)
 		{
 			Event e2 = e;
 			e2.event.mouse_event.x -= (*it)->GetGlobalPosition().x;
 			e2.event.mouse_event.y -= (*it)->GetGlobalPosition().y;
-			(*it)->HandleEvent(e2);
+			if(Collisions2i::PointInRectangle(Vector2i(e2.event.mouse_event.x, e2.event.mouse_event.y), Vector2i(0, 0), (*it)->GetSize()))
+			{
+				(*it)->HandleEvent(e2);
+				move_handled = true;
+			}
+		}
+		if(!move_handled && widget_with_highlight_)
+		{
+			widget_with_highlight_->Invalidate();
+			widget_with_highlight_ = NULL;
 		}
 
 		mouse_position_.x = e.event.mouse_event.x;
