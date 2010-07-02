@@ -19,6 +19,9 @@ void ModeGame::Setup()
 	back->SetPosition(Vector2i(4, Widget::GetScreenSize().y - back->GetSize().y - 4));
 	back->SetText("Back", TextAlignment::Centre);
 
+	Widget* betaTag = new Widget("Beta.png");
+	betaTag->SetPosition(Widget::GetScreenSize() - betaTag->GetSize());
+
 	//Attach callback
 	back->OnClick.connect(boost::bind(&ModeGame::clickBack, this, _1));
 }
