@@ -3,8 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual C++ Express 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArkBin", "src\ArkBin\ArkBin.vcproj", "{B7104D76-9DBE-41BE-9E26-8F0FE2BC036E}"
 	ProjectSection(ProjectDependencies) = postProject
-		{21E8525A-AD1A-45C8-B208-907B27ECE07E} = {21E8525A-AD1A-45C8-B208-907B27ECE07E}
 		{A5A988D6-0ECB-4951-A1E3-D04A301B8580} = {A5A988D6-0ECB-4951-A1E3-D04A301B8580}
+		{21E8525A-AD1A-45C8-B208-907B27ECE07E} = {21E8525A-AD1A-45C8-B208-907B27ECE07E}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDLGUIlib", "src\SDLGUIlib\SDLGUIlib.vcproj", "{A5A988D6-0ECB-4951-A1E3-D04A301B8580}"
@@ -17,6 +17,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArkLib", "src\ArkLib\ArkLib.vcproj", "{21E8525A-AD1A-45C8-B208-907B27ECE07E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArkLibTest", "src\ArkLibTest\ArkLibTest.vcproj", "{FF9BAD1C-5775-4A66-92B5-D91C16AFF29C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{21E8525A-AD1A-45C8-B208-907B27ECE07E} = {21E8525A-AD1A-45C8-B208-907B27ECE07E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

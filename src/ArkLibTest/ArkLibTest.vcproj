@@ -28,7 +28,7 @@
 			<Tool
 				Name="VCCustomBuildTool"
 				Description="Running unit tests"
-				CommandLine="&quot;$(TargetPath)&quot;"
+				CommandLine="&quot;$(TargetPath)&quot;&#x0D;&#x0A;"
 				Outputs="$(SolutionDir)\FileThatDoesntExist.txt"
 			/>
 			<Tool
@@ -111,7 +111,7 @@
 			<Tool
 				Name="VCCustomBuildTool"
 				Description="Running unit tests"
-				CommandLine="&quot;$(TargetPath)&quot;"
+				CommandLine="&quot;$(TargetPath)&quot;&#x0D;&#x0A;"
 				Outputs="$(SolutionDir)\FileThatDoesntExist.txt"
 			/>
 			<Tool
@@ -215,6 +215,22 @@
 			<Filter
 				Name="Tests"
 				>
+				<File
+					RelativePath=".\BallTests.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\BrickCollectionTests.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\BrickTests.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GameTests.cpp"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

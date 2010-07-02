@@ -144,9 +144,33 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\Logger.cpp"
+				RelativePath=".\ArkGame.cpp"
 				>
 			</File>
+			<Filter
+				Name="Common"
+				>
+				<File
+					RelativePath=".\Logger.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Game"
+				>
+				<File
+					RelativePath=".\Ball.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Brick.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\BrickCollection.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -154,17 +178,41 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\Logger.h"
+				RelativePath=".\ArkGame.h"
 				>
 			</File>
-			<File
-				RelativePath=".\vmath-collisions.h"
+			<Filter
+				Name="Common"
 				>
-			</File>
-			<File
-				RelativePath=".\vmath.h"
+				<File
+					RelativePath=".\Logger.h"
+					>
+				</File>
+				<File
+					RelativePath=".\vmath-collisions.h"
+					>
+				</File>
+				<File
+					RelativePath=".\vmath.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Game"
 				>
-			</File>
+				<File
+					RelativePath=".\Ball.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Brick.h"
+					>
+				</File>
+				<File
+					RelativePath=".\BrickCollection.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
