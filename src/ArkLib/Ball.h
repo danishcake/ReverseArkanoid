@@ -32,16 +32,16 @@ private:
 
 //Public getters/setters
 public:
-	const Vector2f GetPosition(){return mPosition;}
+	Vector2f GetPosition() const {return mPosition;}
 	void SetPosition(Vector2f position){mPosition = position;}
 
-	const Vector2f GetVelocity(){return mVelocity;}
+	Vector2f GetVelocity() const {return mVelocity;}
 	void SetVelocity(Vector2f velocity){mVelocity = velocity;}
 
-	const Vector2f GetBounds(){return mBounds;}
+	Vector2f GetBounds() const {return mBounds;}
 	void SetBounds(Vector2f bounds){mBounds = bounds;}
 
-	const float GetRadius(){return mRadius;}
+	float GetRadius() const {return mRadius;}
 	void SetRadius(float radius){mRadius = radius;}
 
 //Public methods

@@ -38,9 +38,9 @@ private:
 
 //Public getters/setters
 public:
-	const BrickType::Enum GetBrickType(){return mBrickType;}
+	BrickType::Enum GetBrickType() const {return mBrickType;}
 	Vector2f GetSize(){return mSize;}
 
-	const Vector2f GetPosition(){return mPosition;}
+	Vector2f GetPosition() const {return mPosition;}
 	void SetPosition(Vector2f position){mPosition = position;}
 };

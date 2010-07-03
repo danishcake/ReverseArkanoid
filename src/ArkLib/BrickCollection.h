@@ -31,16 +31,16 @@ private:
 
 //Public getters/setters
 public:
-	const std::vector<Brick::SharedPointer> GetBricks(){return mBricks;}
+	std::vector<Brick::SharedPointer> GetBricks() const {return mBricks;}
 	void AddBrick(Brick::SharedPointer brick);
 
-	const Vector2f GetPosition(){return mPosition;}
-	const float GetLeftEdge(){return mLeftEdge;}
-	const float GetRightEdge(){return mRightEdge;}
+	Vector2f GetPosition() const {return mPosition;}
+	float GetLeftEdge() const {return mLeftEdge;}
+	float GetRightEdge() const {return mRightEdge;}
 
 	void SetX(float x);
 
-	const Vector2f GetBounds(){return mBounds;}
+	Vector2f GetBounds() const {return mBounds;}
 	void SetBounds(Vector2f bounds){mBounds = bounds;}
 
 //Private methods
