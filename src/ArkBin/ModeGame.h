@@ -1,5 +1,6 @@
 #pragma once
 #include "IMode.h"
+#include <ArkGame.h>
 
 class Widget;
 
@@ -9,8 +10,14 @@ class Widget;
 class ModeGame : 
 	public IMode
 {
+//Private members
+private:
+	Widget* mFeedbackWidget;
+//Private methods
 private:
 	void clickBack(Widget* /*widget*/);
+	void clickBetaTag(Widget* /*widget*/);
+	ArkGame::SharedPointer mGame;
 public:
 	ModeGame();
 

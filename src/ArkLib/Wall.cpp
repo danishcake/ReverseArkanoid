@@ -1,9 +1,9 @@
-#include "BrickCollection.h"
+#include "Wall.h"
 #include <cfloat>
 
 using std::vector;
 
-BrickCollection::BrickCollection(void) :
+Wall::Wall(void) :
 	mPosition((float)INITIAL_X, (float)FIXED_Y),
 	mLeftEdge(0),
 	mRightEdge(0),
@@ -11,17 +11,17 @@ BrickCollection::BrickCollection(void) :
 {
 }
 
-BrickCollection::~BrickCollection(void)
+Wall::~Wall(void)
 {
 }
 
-void BrickCollection::AddBrick(Brick::SharedPointer brick)
+void Wall::AddBrick(Brick::SharedPointer brick)
 {
 	mBricks.push_back(brick);
 	RecalculateBounds();
 }
 
-void BrickCollection::RecalculateBounds()
+void Wall::RecalculateBounds()
 {
 	if(mBricks.size() > 0)
 	{
@@ -44,7 +44,7 @@ void BrickCollection::RecalculateBounds()
 	}
 }
 
-void BrickCollection::SetX(float x)
+void Wall::SetX(float x)
 {
 	if(x > mBounds.x - mRightEdge)
 		mPosition.x = mBounds.x - mRightEdge;

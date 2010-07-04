@@ -410,11 +410,38 @@ public:
    }
 
    /**
+     * Determines if a line segment section of hull insects with a circle
+	 * @param centre The centre of the circle
+	 * @param radius The radius of the circle
+	 * @param hull A pointer to an array of points forming the hull
+	 * @param num_points The number of points in the hull
+	 * @param out the point of collision
+	 * @param collision_index The index into the hull where the collision occurred
+	 */
+   static bool CircleIntersectsConvex(const Vector2<T> centre, const T radius, const Vector2<T>* hull, const int num_points, Vector2<T>& out, int& collision_index)
+   {
+      /*if(PointInConvex(hull, num_points, centre)
+      {
+         *out = centre;
+         return true;
+      }*/ //True behavior would have something like this, but I don't really want it for this program
+      for(int i = 0; i < num_points - 1; i++)
+      {
+         if(LineInCircle(hull[i], hull[i+1], centre, radius, out))
+         {
+            return true;
+            collision_index = i;
+         }
+      }
+      return false;
+   }
+
+   /**
      * Determines if a line segment intersects with a polygon. Returns on first encountered point
      * @param P1 The first point in the line segment
      * @param P2 The second point in the line segment
      * @param hull A pointer to an array of points forming the hull
-     * @param num_points The number of poits in the hull
+     * @param num_points The number of points in the hull
 	 */
    static bool LineInPolygon(const Vector3<T> P1, const Vector3<T> P2, const Vector3<T>* hull, const int num_points)
    {

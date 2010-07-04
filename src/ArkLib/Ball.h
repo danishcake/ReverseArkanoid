@@ -33,6 +33,7 @@ private:
 //Public getters/setters
 public:
 	Vector2f GetPosition() const {return mPosition;}
+	Vector2f GetCentre() const {return mPosition + Vector2f(mRadius, mRadius);}
 	void SetPosition(Vector2f position){mPosition = position;}
 
 	Vector2f GetVelocity() const {return mVelocity;}

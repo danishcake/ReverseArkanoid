@@ -1,19 +1,19 @@
 #include "stdafx.h"
-#include <BrickCollection.h>
+#include <Wall.h>
 #include <Brick.h>
 
 TEST(CollectionBasics)
 {
-	BrickCollection::SharedPointer collection(new BrickCollection());
-	CHECK_EQUAL(Vector2f(BrickCollection::INITIAL_X, BrickCollection::FIXED_Y), collection->GetPosition());
+	Wall::SharedPointer collection(new Wall());
+	CHECK_EQUAL(Vector2f(Wall::INITIAL_X, Wall::FIXED_Y), collection->GetPosition());
 	CHECK_EQUAL(0, collection->GetBricks().size());
 
-	CHECK_EQUAL(Vector2f(BrickCollection::DEFAULT_BOUNDS_W, BrickCollection::DEFAULT_BOUNDS_H), collection->GetBounds());
+	CHECK_EQUAL(Vector2f(Wall::DEFAULT_BOUNDS_W, Wall::DEFAULT_BOUNDS_H), collection->GetBounds());
 }
 
 TEST(AddBricks)
 {
-	BrickCollection::SharedPointer collection(new BrickCollection());
+	Wall::SharedPointer collection(new Wall());
 	Brick::SharedPointer brick(new Brick(BrickType::BlueBrick));
 	brick->SetPosition(Vector2f(0, 0));
 

@@ -167,7 +167,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\BrickCollection.cpp"
+					RelativePath=".\Paddle.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Wall.cpp"
 					>
 				</File>
 			</Filter>
@@ -209,7 +213,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\BrickCollection.h"
+					RelativePath=".\Paddle.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Wall.h"
 					>
 				</File>
 			</Filter>

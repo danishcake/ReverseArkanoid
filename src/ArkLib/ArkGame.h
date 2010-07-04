@@ -2,8 +2,9 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
 #include "vmath.h"
-#include "BrickCollection.h"
+#include "Wall.h"
 #include "Ball.h"
+#include "Paddle.h"
 #include <vector>
 
 /* ArkGame represents the moding of the game - it performs all the updates,
@@ -37,23 +38,29 @@ private:
 	Vector2f mBounds;
 	GamePhase::Enum mPhase;
 	float mTimer;
-	BrickCollection::SharedPointer mWall;
+	Wall::SharedPointer mWall;
 	std::vector<Ball::SharedPointer> mBalls;
+	Paddle::SharedPointer mPaddle;
 
 //Public getters/setters
 public:
 	Vector2f GetBounds() const{return mBounds;}
-	void SetBounds(Vector2f bounds){mBounds = bounds;}
+	void SetBounds(Vector2f bounds);
 
 	GamePhase::Enum GetPhase() const{return mPhase;}
 
-	BrickCollection::SharedPointer GetWall() const{return mWall;}
-	void SetWall(BrickCollection::SharedPointer wall);
+	Wall::SharedPointer GetWall() const{return mWall;}
+	void SetWall(Wall::SharedPointer wall);
 
 	void AddBall(Ball::SharedPointer ball);
 	const std::vector<Ball::SharedPointer> GetBalls() const {return mBalls;}
 
+	Paddle::SharedPointer GetPaddle() const {return mPaddle;}
+
 //Public methods
 public:
 	void Tick(float timespan);
+//Private methods
+private:
+	void TickRunning(float timespan);
 };

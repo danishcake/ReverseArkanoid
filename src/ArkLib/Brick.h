@@ -13,7 +13,7 @@ namespace BrickType
 	};
 }
 
-/* The Brick class is part of the player. It goes inside the BrickCollection 
+/* The Brick class is part of the player. It goes inside the Wall 
  * that the player can move. Some bricks may have multiple lives
  */
 class Brick

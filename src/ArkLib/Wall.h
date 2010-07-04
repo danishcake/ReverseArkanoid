@@ -5,12 +5,12 @@
 #include <vector>
 #include "Brick.h"
 
-class BrickCollection
+class Wall
 {
 //Typedefs
 public:
-	typedef boost::shared_ptr<BrickCollection> SharedPointer;
-	typedef boost::weak_ptr<BrickCollection> WeakPointer;
+	typedef boost::shared_ptr<Wall> SharedPointer;
+	typedef boost::weak_ptr<Wall> WeakPointer;
 //Constants
 	static const int INITIAL_X = 200;
 	static const int FIXED_Y = 440;
@@ -18,8 +18,8 @@ public:
 	static const int DEFAULT_BOUNDS_H = 480;
 //Constructors
 public:
-	BrickCollection(void);
-	~BrickCollection(void);
+	Wall(void);
+	~Wall(void);
 
 //Private members
 private:

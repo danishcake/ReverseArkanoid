@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include <ArkGame.h>
-#include <BrickCollection.h>
+#include <Wall.h>
 #include <Ball.h>
 #include <Brick.h>
 
@@ -16,13 +16,13 @@ TEST(GameBasics)
 	CHECK_EQUAL(GamePhase::Starting, game->GetPhase());
 }
 
-TEST(BrickCollectionInheritsBounds)
+TEST(WallInheritsBounds)
 {
 	ArkGame::SharedPointer game(new ArkGame());
 	game->SetBounds(Vector2f(640, 480));
 
-	BrickCollection::SharedPointer wall(new BrickCollection());
-	CHECK_EQUAL(Vector2f(BrickCollection::DEFAULT_BOUNDS_W, BrickCollection::DEFAULT_BOUNDS_H), wall->GetBounds());
+	Wall::SharedPointer wall(new Wall());
+	CHECK_EQUAL(Vector2f(Wall::DEFAULT_BOUNDS_W, Wall::DEFAULT_BOUNDS_H), wall->GetBounds());
 
 	game->SetWall(wall);
 	CHECK_EQUAL(Vector2f(640, 480), wall->GetBounds());
@@ -45,8 +45,10 @@ TEST(PaddleInheritsBounds)
 {
 	//Paddle is automatically added as I have no need to change it
 	ArkGame::SharedPointer game(new ArkGame());
+	CHECK_EQUAL(Vector2f(ArkGame::DEFAULT_BOUNDS_W, ArkGame::DEFAULT_BOUNDS_H), game->GetPaddle()->GetBounds());
+	game->SetBounds(Vector2f(640, 480));
 
-
+	CHECK_EQUAL(Vector2f(640, 480), game->GetPaddle()->GetBounds());
 }
 
 TEST(GameStartsAfterXSeconds)
@@ -61,12 +63,52 @@ TEST(Lives)
 {
 }
 
+TEST(GameCreatesBallAtStart)
+{
+	ArkGame::SharedPointer game(new ArkGame());
+	game->Tick(ArkGame::STARTING_TIME);
+	CHECK_EQUAL(1, game->GetBalls().size());
+}
+
 TEST(BallBouncesOnPaddle)
 {
+	ArkGame::SharedPointer game(new ArkGame());
+	game->Tick(ArkGame::STARTING_TIME);
+	Ball::SharedPointer ball = game->GetBalls()[0];
+	ball->SetPosition(Vector2f(ball->GetPosition().x, 100));
+	ball->SetVelocity(Vector2f(0, -100));
+
+	float distance = 100 - ball->GetRadius() - Paddle::FIXED_Y;
+	int steps = (distance / -ball->GetVelocity().y) / 0.016666f;
+	for(int i = 0; i < steps; i++)
+	{
+		game->Tick(0.016666f);
+	} //Advance until bounce expected
+	CHECK_CLOSE(100, ball->GetVelocity().y, 5);
 }
 
 TEST(BlocksDestroyedByBall)
 {
+	ArkGame::SharedPointer game(new ArkGame());
+	
+	Wall::SharedPointer wall(new Wall());
+	Brick::SharedPointer brick(new Brick(BrickType::BlueBrick));
+	wall->AddBrick(brick);
+	game->SetWall(wall);
+	game->Tick(ArkGame::STARTING_TIME);
+
+	Ball::SharedPointer ball = game->GetBalls()[0];
+	ball->SetPosition(Vector2f(100, 100));
+	ball->SetVelocity(Vector2f(0, 100));
+
+	wall->SetX(100 - Brick::BRICK_WIDTH/2);
+	float distance = Wall::FIXED_Y - ball->GetPosition().y - ball->GetRadius();
+	int steps = (distance / ball->GetVelocity().y) / 0.016666f;
+	for(int i = 0; i < steps; i++)
+	{
+		game->Tick(0.016666f);
+	}
+	CHECK_CLOSE(-100, ball->GetVelocity().y, 5);
 }
 
 TEST(Scoring)
