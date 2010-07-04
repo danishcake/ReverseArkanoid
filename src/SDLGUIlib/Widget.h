@@ -215,6 +215,7 @@ public:
 	void SetEditting(bool _editting);
 	std::string GetText(){return widget_text_.GetText();}
 	void SetTextSize(TextSize::Enum _text_size){widget_text_.SetTextSize(_text_size);}
+	void SetMargins(int _left, int _right, int _top, int _bottom){widget_text_.SetMargins(_left, _right, _top, _bottom);}
 
 	/* Screen fading */
 	static void SetFade(float _fade_amount);

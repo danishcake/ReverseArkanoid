@@ -100,6 +100,13 @@ public:
 	int GetMarginRight() const {return margin_right_;}
 	int GetMarginTop() const {return margin_top_;}
 	int GetMarginBottom() const {return margin_bottom_;}
+	void SetMargins(int _left, int _right, int _top, int _bottom)
+	{
+		margin_left_ = _left;
+		margin_right_ = _right;
+		margin_top_ = _top;
+		margin_bottom_ = _bottom;
+	}
 
 	bool GetAutowrap() const {return autowrap_;}
 	void SetAutowrap(bool _autowrap, int _widget_width)

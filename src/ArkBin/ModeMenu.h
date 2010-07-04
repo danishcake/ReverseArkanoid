@@ -10,11 +10,15 @@ class Widget;
 class ModeMenu : 
 	public IMode
 {
+//Private members
+private:
+	bool mExitClicked;
+	Widget* mFeedbackWidget;
+//Private methods
 private:
 	void clickExit(Widget* /*widget*/);
 	void clickNewGame(Widget* /*widget*/);
-
-	bool mExitClicked;
+	void clickBetaTag(Widget* /*widget*/);
 public:
 	ModeMenu();
 

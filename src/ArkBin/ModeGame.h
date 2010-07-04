@@ -12,12 +12,13 @@ class ModeGame :
 {
 //Private members
 private:
+	ArkGame::SharedPointer mGame;
 	Widget* mFeedbackWidget;
 //Private methods
 private:
 	void clickBack(Widget* /*widget*/);
 	void clickBetaTag(Widget* /*widget*/);
-	ArkGame::SharedPointer mGame;
+	
 public:
 	ModeGame();
 

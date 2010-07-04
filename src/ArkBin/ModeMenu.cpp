@@ -2,6 +2,7 @@
 #include "ModeMenu.h"
 #include "ModeGame.h"
 #include <Widget.h>
+#include "FeedbackWidget.h"
 
 ModeMenu::ModeMenu() :
 	mExitClicked(false)
@@ -40,6 +41,8 @@ void ModeMenu::Setup()
 	Widget* betaTag = new Widget("Beta.png");
 	betaTag->SetPosition(Widget::GetScreenSize() - betaTag->GetSize());
 
+	mFeedbackWidget = new FeedbackWidget();
+
 	newGame->LinkDown(loadEditor);
 	loadEditor->LinkUp(newGame);
 	loadEditor->LinkDown(showOptions);
@@ -50,21 +53,27 @@ void ModeMenu::Setup()
 	//Attach callback
 	exitGame->OnClick.connect(boost::bind(&ModeMenu::clickExit, this, _1));
 	newGame->OnClick.connect(boost::bind(&ModeMenu::clickNewGame, this, _1));
+	betaTag->OnClick.connect(boost::bind(&ModeMenu::clickBetaTag, this, _1));
 }
 
 ModeAction::Enum ModeMenu::Tick(float dt)
 {
-	ModeAction::Enum result = IMode::Tick(dt);
-	if(!mExitClicked)
+	if(!mFeedbackWidget->HasModal())
 	{
-		Widget::SetFade(mFade);
-	} else
-	{
-		Widget::SetFade((mAge - mPendTime) / mPendTime);
-		if(mAge - mPendTime >= mPendTime)
-			result = ModeAction::Exit;
+		ModeAction::Enum result = IMode::Tick(dt);
+		if(!mExitClicked)
+		{
+			Widget::SetFade(mFade);
+		} else
+		{
+			Widget::SetFade((mAge - mPendTime) / mPendTime);
+			if(mAge - mPendTime >= mPendTime)
+				result = ModeAction::Exit;
+		}
+		return result;
 	}
-	return result;
+	Widget::SetFade(0);
+	return ModeAction::NoAction;
 }
 
 ModeType::Enum ModeMenu::GetType()
@@ -87,4 +96,9 @@ void ModeMenu::clickNewGame(Widget* /*widget*/)
 {
 	if(!mPendMode)
 		mPendMode = new ModeGame();
+}
+
+void ModeMenu::clickBetaTag(Widget* /*widget*/)
+{
+	((FeedbackWidget*)mFeedbackWidget)->Show();
 }

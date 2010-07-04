@@ -35,11 +35,16 @@ void ModeGame::Setup()
 
 ModeAction::Enum ModeGame::Tick(float dt)
 {
-	mGame->Tick(dt);
+	if(!mFeedbackWidget->HasModal())
+	{
+		mGame->Tick(dt);
 
-	ModeAction::Enum result = IMode::Tick(dt);
-	Widget::SetFade(mFade);
-	return result;
+		ModeAction::Enum result = IMode::Tick(dt);
+		Widget::SetFade(mFade);
+		return result;
+	}
+	Widget::SetFade(0);
+	return ModeAction::NoAction;
 }
 
 ModeType::Enum ModeGame::GetType()
@@ -72,6 +77,5 @@ void ModeGame::clickBack(Widget* /*widget*/)
 
 void ModeGame::clickBetaTag(Widget* /*widget*/)
 {
-	mFeedbackWidget->SetVisibility(true);
-	mFeedbackWidget->SetModal(true);
+	((FeedbackWidget*)mFeedbackWidget)->Show();
 }

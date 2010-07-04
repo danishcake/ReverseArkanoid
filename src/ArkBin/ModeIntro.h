@@ -11,11 +11,15 @@
 class ModeIntro : 
 	public IMode
 {
+//Private members
 private:
-	void MouseSkip(Widget* /*_widget*/, MouseEventArgs /*mouse_args*/);
-	void KeySkip(Widget* /*widget*/, KeyPressEventArgs /*key_args*/);
 	Widget* mLogo1;
 	Widget* mLogo2;
+	Widget* mFeedbackWidget;
+//Private methods
+private:
+	void KeySkip(Widget* /*widget*/, KeyPressEventArgs /*key_args*/);
+	void clickBetaTag(Widget* /*widget*/);
 public:
 	virtual IMode* Teardown();
 	virtual void Setup();

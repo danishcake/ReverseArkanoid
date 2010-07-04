@@ -1,16 +1,7 @@
 #include "StdAfx.h"
 #include "ModeIntro.h"
 #include "ModeMenu.h"
-
-void ModeIntro::MouseSkip(Widget* /*_widget*/, MouseEventArgs /*mouse_args*/)
-{
-	mPendMode = new ModeMenu();
-}
-
-void ModeIntro::KeySkip(Widget* /*widget*/, KeyPressEventArgs /*key_args*/)
-{
-	mPendMode = new ModeMenu();
-}
+#include "FeedbackWidget.h"
 
 IMode* ModeIntro::Teardown()
 {
@@ -27,15 +18,23 @@ void ModeIntro::Setup()
 	Widget* betaTag = new Widget("Beta.png");
 	betaTag->SetPosition(Widget::GetScreenSize() - betaTag->GetSize());
 
+	mFeedbackWidget = new FeedbackWidget();
+
+	//Attach callback
 	Widget::OnGlobalKeyUp.connect(boost::bind(&ModeIntro::KeySkip, this, _1, _2));
-	Widget::OnGlobalMouseUp.connect(boost::bind(&ModeIntro::MouseSkip, this, _1, _2));
+	betaTag->OnClick.connect(boost::bind(&ModeIntro::clickBetaTag, this, _1));
 }
 
 ModeAction::Enum ModeIntro::Tick(float dt)
 {
-	ModeAction::Enum result = IMode::Tick(dt);
-	Widget::SetFade(mFade);
-	return result;
+	if(!mFeedbackWidget->HasModal())
+	{
+		ModeAction::Enum result = IMode::Tick(dt);
+		Widget::SetFade(mFade);
+		return result;
+	}
+	Widget::SetFade(0);
+	return ModeAction::NoAction;
 }
 
 ModeType::Enum ModeIntro::GetType()
@@ -45,4 +44,14 @@ ModeType::Enum ModeIntro::GetType()
 
 void ModeIntro::Draw(SDL_Surface* screenSurface)
 {
+}
+
+void ModeIntro::KeySkip(Widget* /*widget*/, KeyPressEventArgs /*key_args*/)
+{
+	mPendMode = new ModeMenu();
+}
+
+void ModeIntro::clickBetaTag(Widget* /*widget*/)
+{
+	((FeedbackWidget*)mFeedbackWidget)->Show();
 }
