@@ -69,7 +69,6 @@ Widget::Widget(void)
 	allow_edit_ = false;
 	z_order_ = 0;
 	deletion_due_ = false;
-	font_size_ = TextSize::Normal;
 	if(event_lock_)
 	{
 		pending_root_.push_back(this);
@@ -107,7 +106,6 @@ Widget::Widget(std::string _filename)
 	allow_edit_ = false;
 	z_order_ = 0;
 	deletion_due_ = false;
-	font_size_ = TextSize::Normal;
 	if(event_lock_)
 	{
 		pending_root_.push_back(this);
@@ -145,7 +143,6 @@ Widget::Widget(BlittableRect* _blittable)
 	allow_edit_ = false;
 	z_order_ = 0;
 	deletion_due_ = false;
-	font_size_ = TextSize::Normal;
 	if(event_lock_)
 	{
 		pending_root_.push_back(this);
@@ -197,7 +194,6 @@ Widget::Widget(VerticalTile _tiles, int _height)
 	allow_edit_ = false;
 	z_order_ = 0;
 	deletion_due_ = false;
-	font_size_ = TextSize::Normal;
 	if(event_lock_)
 	{
 		pending_root_.push_back(this);
@@ -249,7 +245,6 @@ Widget::Widget(HorizontalTile _tiles, int _width)
 	allow_edit_ = false;
 	z_order_ = 0;
 	deletion_due_ = false;
-	font_size_ = TextSize::Normal;
 
 	if(event_lock_)
 	{
@@ -355,7 +350,6 @@ Widget::Widget(NinePatch _tiles, int _width, int _height)
 	allow_edit_ = false;
 	z_order_ = 0;
 	deletion_due_ = false;
-	font_size_ = TextSize::Normal;
 
 	if(event_lock_)
 	{
@@ -750,7 +744,7 @@ void Widget::SetTextWrap(bool _wrap)
 
 	if(change)
 	{
-		widget_text_.SetAutowrap(_wrap, size_.x / 16);
+		widget_text_.SetAutowrap(_wrap, size_.x);
 		Invalidate();
 	}
 }
@@ -761,8 +755,7 @@ void Widget::Redraw()
 	//Draw self - puts backbuffer onto front buffer. Use raw blit to copy alpha
 	back_rect_->RawBlit(Vector2i(0,0), blit_rect_);
 	//Superimpose text
-	blit_rect_->SetTextSize(font_size_);
-	blit_rect_->BlitTextLines(widget_text_.GetTextLines(), widget_text_.GetAlignment());
+	blit_rect_->BlitText(widget_text_);
 	//Do any custom hooked drawing
 	OnDraw(this, blit_rect_);
 
@@ -1012,7 +1005,7 @@ void Widget::RenderRoot(BlittableRect* _screen)
 		if(fmod(sum_time_, 0.5) < 0.25)
 		{
 			Vector2i top_left, bottom_right;
-			widget_with_edit_->blit_rect_->MeasureText(widget_with_edit_->widget_text_.GetText(), widget_with_edit_->widget_text_.GetAlignment(), top_left, bottom_right);
+			widget_with_edit_->blit_rect_->MeasureText(widget_with_edit_->widget_text_, top_left, bottom_right);
 			edit_cursor_rect_->Blit(widget_with_edit_->GetGlobalPosition() + Vector2i(bottom_right.x, bottom_right.y), _screen);
 		}
 	}

@@ -12,14 +12,27 @@ namespace TextAlignment
 	};
 }
 
+namespace TextSize
+{
+	enum Enum
+	{
+		Normal, Small
+	};
+}
+
 struct WidgetText
 {
 private:
 	TextAlignment::Enum alignment_;
+	TextSize::Enum text_size_;
 	std::string text_;
 	std::vector<std::string> text_lines_;
 	bool autowrap_;
 	int line_break_length_;
+	int margin_left_;
+	int margin_right_;
+	int margin_top_;
+	int margin_bottom_;
 
 	void LayoutText()
 	{
@@ -62,24 +75,40 @@ public:
 		alignment_ = TextAlignment::Centre;
 		autowrap_ = false; 
 		line_break_length_ = 1000;
+		margin_left_ = 4;
+		margin_right_ = 4;
+		margin_top_ = 4;
+		margin_bottom_ = 4;
+		text_size_ = TextSize::Normal;
 	}
 
-	std::string GetText(){return text_;}
-	std::vector<std::string> GetTextLines(){return text_lines_;}
+	std::string GetText() const {return text_;}
+	std::vector<std::string> GetTextLines() const {return text_lines_;}
 	void SetText(std::string _text)
 	{
 		text_ = _text;
 		LayoutText();
 	}
 
-	TextAlignment::Enum GetAlignment(){return alignment_;}
-	void SetAlignment(TextAlignment::Enum _alignment){alignment_ = _alignment;}
+	void SetTextSize(TextSize::Enum _text_size){text_size_ = _text_size;}
+	TextSize::Enum GetTextSize() const {return text_size_;}
 
-	bool GetAutowrap(){return autowrap_;}
-	void SetAutowrap(bool _autowrap, int _line_break_length)
+	void SetAlignment(TextAlignment::Enum _alignment){alignment_ = _alignment;}
+	TextAlignment::Enum GetAlignment() const {return alignment_;}
+
+	int GetMarginLeft() const {return margin_left_;}
+	int GetMarginRight() const {return margin_right_;}
+	int GetMarginTop() const {return margin_top_;}
+	int GetMarginBottom() const {return margin_bottom_;}
+
+	bool GetAutowrap() const {return autowrap_;}
+	void SetAutowrap(bool _autowrap, int _widget_width)
 	{
 		autowrap_ = _autowrap;
-		line_break_length_ = _line_break_length;
+		if(text_size_ == TextSize::Normal)
+			line_break_length_ = (_widget_width - margin_left_ - margin_right_) / 16;
+		else
+			line_break_length_ = (_widget_width - margin_left_ - margin_right_) / 10;
 		LayoutText();
 	}
 };

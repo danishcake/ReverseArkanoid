@@ -67,8 +67,8 @@ namespace
 		SDL_LockSurface(_dest);
 		//Clamp src_rect so won't read past end of image
 		SDL_Rect src_rect = *_src_rect;
-		src_rect.w = src_rect.w + src_rect.x > _src->w ? _src->w - src_rect.x : src_rect.w;
-		src_rect.h = src_rect.h + src_rect.y > _src->h ? _src->h - src_rect.y : src_rect.h;
+		src_rect.w = static_cast<Uint16>(src_rect.w + src_rect.x > _src->w ? _src->w - src_rect.x : src_rect.w);
+		src_rect.h = static_cast<Uint16>(src_rect.h + src_rect.y > _src->h ? _src->h - src_rect.y : src_rect.h);
 
 		//Clamp height and width
 		int w = src_rect.w + _dest_offset.x > _dest->w ? _dest->w - _dest_offset.x : src_rect.w;
@@ -143,14 +143,14 @@ namespace
 
 
 BlittableRect::BlittableRect(SDL_Surface* _surface, bool _dont_free_surface)
-: size_(Vector2i(_surface->w, _surface->h)), surface_(_surface), dont_free_(_dont_free_surface), error_occurred_(false), text_size_(TextSize::Normal)
+: size_(Vector2i(_surface->w, _surface->h)), surface_(_surface), dont_free_(_dont_free_surface), error_occurred_(false)
 {
 	bytes_used += surface_->w * _surface->h * _surface->format->BytesPerPixel;
 }
 
 
 BlittableRect::BlittableRect(Vector2i _size)
-	: size_(_size), text_size_(TextSize::Normal)
+	: size_(_size)
 {
 	error_occurred_ = false;
 	dont_free_ = false;
@@ -167,7 +167,7 @@ BlittableRect::BlittableRect(Vector2i _size)
 	bytes_used += surface_->w * surface_->h * surface_->format->BytesPerPixel;
 }
 
-BlittableRect::BlittableRect(std::string _filename) : text_size_(TextSize::Normal)
+BlittableRect::BlittableRect(std::string _filename)
 {
 	error_occurred_ = false;
 	dont_free_ = false;
@@ -186,7 +186,7 @@ BlittableRect::BlittableRect(std::string _filename) : text_size_(TextSize::Norma
 	bytes_used += surface_->w * surface_->h * surface_->format->BytesPerPixel;
 }
 
-BlittableRect::BlittableRect(std::string _filename, bool _dont_append_animations) : text_size_(TextSize::Normal)
+BlittableRect::BlittableRect(std::string _filename, bool _dont_append_animations)
 {
 	error_occurred_ = false;
 	dont_free_ = false;
@@ -208,7 +208,7 @@ BlittableRect::BlittableRect(std::string _filename, bool _dont_append_animations
 }
 
 BlittableRect::BlittableRect(std::string _filename, Vector2i _size) 
-: size_(_size), text_size_(TextSize::Normal)
+: size_(_size)
 {
 	error_occurred_ = false;
 	dont_free_ = false;
@@ -302,271 +302,181 @@ void BlittableRect::Fill(unsigned char a, unsigned char r, unsigned char g, unsi
 	SDL_FillRect(surface_, NULL, SDL_MapRGBA(surface_->format, r, g, b, a));
 }
 
-void BlittableRect::MeasureText(std::string _text, TextAlignment::Enum _alignment, Vector2i& top_left, Vector2i& bottom_right)
-{
-	int out_x = 0;
-	int out_y = 0;
-	const int font_width = 16;
-	const int font_height = 24;
-	switch(_alignment)
-	{
-	case TextAlignment::TopLeft:
-		out_x = 4;
-		out_y = 4;
-		break;
-	case TextAlignment::Top:
-		out_x = (size_.x/2) - _text.length() * (font_width / 2);
-		out_y = 4;
-		break;
-	case TextAlignment::TopRight:
-		out_x = size_.x - _text.length() * font_width - 4;
-		out_y = 4;
-		break;
-	case TextAlignment::Left:
-		out_x = 4;
-		out_y = (size_.y / 2) - (font_height / 2);
-		break;
-	case TextAlignment::Centre:
-		out_x = (size_.x/2) - _text.length() * (font_width / 2);
-		out_y = (size_.y / 2) - (font_height / 2);
-		break;
-	case TextAlignment::Right:
-		out_x = size_.x - _text.length() * font_width - 4;
-		out_y = (size_.y / 2) - (font_height / 2);
-		break;
-	case TextAlignment::BottomLeft:
-		out_x = 4;
-		out_y = size_.y - font_height - 4;
-		break;
-	case TextAlignment::Bottom:
-		out_x = (size_.x/2) - _text.length() * (font_width / 2);
-		out_y = size_.y - font_height - 4;
-		break;
-	case TextAlignment::BottomRight:
-		out_x = size_.x - _text.length() * font_width - 4;
-		out_y = size_.y - font_height - 4;
-		break;
-	}
-	top_left.x = out_x;
-	top_left.y = out_y;
-
-	for(unsigned int i = 0; i < _text.length(); i++)
-	{
-		out_x += 16;
-	}
-	bottom_right.x = out_x;
-	bottom_right.y = out_y;
-}
-
-void BlittableRect::BlitText(std::string _text, TextAlignment::Enum _alignment)
+void BlittableRect::MeasureText(WidgetText _text, Vector2i& top_left, Vector2i& bottom_right)
 {
 	int font_width;
 	int font_height;
-	switch(text_size_)
+	switch(_text.GetTextSize())
 	{
 	case TextSize::Small:
 		font_width = 10;
 		font_height = 12;
 		break;
+	default:
 	case TextSize::Normal:
 		font_width = 16;
 		font_height = 24;
 		break;
 	}
 
-	if(!font)
-	{
-		font = IMG_Load("Animations/Font.png");
-	}
-	if(!font || font->w != 256 || font->h != 144)
-	{
-		//TODO error
-		Logger::ErrorOut() << "Unable to font image  Animation/Font.png\n";
-		return;
-	}
-	if(!font_small)
-	{
-		font_small = IMG_Load("Animations/Font_small.png");
-	}
-	if(!font_small || font_small->w != 160 || font_small->h != 72)
-	{
-		//TODO error
-		Logger::ErrorOut() << "Unable to font_small image  Animation/Font_small.png\n";
-		return;
-	}
 	int out_x = 0;
 	int out_y = 0;
-
-	switch(_alignment)
-	{
-	case TextAlignment::TopLeft:
-		out_x = 4;
-		out_y = 4;
-		break;
-	case TextAlignment::Top:
-		out_x = (size_.x/2) - static_cast<int>(_text.length()) * (font_width / 2);
-		out_y = 4;
-		break;
-	case TextAlignment::TopRight:
-		out_x = size_.x - static_cast<int>(_text.length()) * font_width - 4;
-		out_y = 4;
-		break;
-	case TextAlignment::Left:
-		out_x = 4;
-		out_y = (size_.y / 2) - (font_height / 2);
-		break;
-	case TextAlignment::Centre:
-		out_x = (size_.x/2) - static_cast<int>(_text.length()) * (font_width / 2);
-		out_y = (size_.y / 2) - (font_height / 2);
-		break;
-	case TextAlignment::Right:
-		out_x = size_.x - static_cast<int>(_text.length()) * font_width - 4;
-		out_y = (size_.y / 2) - (font_height / 2);
-		break;
-	case TextAlignment::BottomLeft:
-		out_x = 4;
-		out_y = size_.y - font_height - 4;
-		break;
-	case TextAlignment::Bottom:
-		out_x = (size_.x/2) - static_cast<int>(_text.length()) * (font_width / 2);
-		out_y = size_.y - font_height - 4;
-		break;
-	case TextAlignment::BottomRight:
-		out_x = size_.x - static_cast<int>(_text.length()) * font_width - 4;
-		out_y = size_.y - font_height - 4;
-		break;
-	}
-	for(unsigned int i = 0; i < _text.length(); i++)
-	{
-		unsigned char c = _text.c_str()[i];
-		c -= 32;
-		if(c >= 96)
-			continue;
-		int sample_x = (c % 16) * font_width;
-		int sample_y = (c / 16) * font_height;
-		SDL_Rect src_rect;
-		src_rect.x = static_cast<Sint16>(sample_x);
-		src_rect.y = static_cast<Sint16>(sample_y);
-		src_rect.w = font_width;
-		src_rect.h = font_height;
-
-
-		SDL_Rect dest_rect;
-		dest_rect.x = static_cast<Sint16>(out_x);
-		dest_rect.y = static_cast<Sint16>(out_y);
-		dest_rect.w = font_width;
-		dest_rect.h = font_height;
-		switch(text_size_)
-		{
-		case TextSize::Small:
-			SDL_BlitSurface(font_small, &src_rect, surface_, &dest_rect);
-			break;
-		case TextSize::Normal:
-			SDL_BlitSurface(font, &src_rect, surface_, &dest_rect);
-			break;
-		}
-		out_x += font_width;
-	}
-}
-void BlittableRect::BlitTextLines(std::vector<std::string> _text_lines, TextAlignment::Enum _alignment)
-{
-	int font_width;
-	int font_height;
-	switch(text_size_)
-	{
-	case TextSize::Small:
-		font_width = 10;
-		font_height = 12;
-		break;
-	case TextSize::Normal:
-		font_width = 16;
-		font_height = 24;
-		break;
-	}
-	if(!font)
-	{
-		font = IMG_Load("Animations/Font.png");
-	}
-	if(!font || font->w != 256 || font->h != 144)
-	{
-		//TODO error
-		Logger::ErrorOut() << "Unable to font image  Animation/Font.png\n";
-		return;
-	}
-	if(!font_small)
-	{
-		font_small = IMG_Load("Animations/Font_small.png");
-	}
-	if(!font_small || font_small->w != 160 || font_small->h != 72)
-	{
-		//TODO error
-		Logger::ErrorOut() << "Unable to font_small image  Animation/Font_small.png\n";
-		return;
-	}
-
-
-	int init_out_x = 0;
-	int init_out_y = 0;
+//Find longest line for right aligned
 	int longest_line = 0;
-	for(std::vector<std::string>::iterator it = _text_lines.begin(); it != _text_lines.end(); ++it)
+	std::vector<std::string> text_lines = _text.GetTextLines();
+	for(std::vector<std::string>::iterator it = text_lines.begin(); it != text_lines.end(); ++it)
 	{
 		if((int)it->length() > longest_line)
 			longest_line = (int)it->length();
 	}
 
-	switch(_alignment)
+	switch(_text.GetAlignment())
 	{
 	case TextAlignment::TopLeft:
-		init_out_x = 4;
-		init_out_y = 4;
+		out_x = _text.GetMarginLeft();
+		out_y = _text.GetMarginTop();
 		break;
 	case TextAlignment::Top:
-		init_out_x = static_cast<int>((size_.x/2) - longest_line * (font_width / 2));
-		init_out_y = 4;
+		out_x = static_cast<int>((size_.x / 2) - longest_line * (font_width / 2));
+		out_y = _text.GetMarginTop();
 		break;
 	case TextAlignment::TopRight:
-		init_out_x = static_cast<int>(size_.x - longest_line * font_width - 4);
-		init_out_y = 4;
+		out_x = static_cast<int>(size_.x - longest_line * font_width - _text.GetMarginRight());
+		out_y = _text.GetMarginTop();
 		break;
 	case TextAlignment::Left:
-		init_out_x = 4;
-		init_out_y = static_cast<int>((size_.y / 2) - (_text_lines.size() * font_height / 2));
+		out_x = _text.GetMarginLeft();
+		out_y = static_cast<int>((size_.y / 2) - (text_lines.size() * font_height / 2));
 		break;
 	case TextAlignment::Centre:
-		init_out_x = static_cast<int>((size_.x/2) - longest_line * (font_width / 2));
-		init_out_y = static_cast<int>((size_.y / 2)  - (_text_lines.size() * font_height / 2));
+		out_x = static_cast<int>((size_.x / 2) - longest_line * (font_width / 2));
+		out_y = static_cast<int>((size_.y / 2)  - (text_lines.size() * font_height / 2));
 		break;
 	case TextAlignment::Right:
-		init_out_x = static_cast<int>(size_.x - longest_line * font_width - 4);
-		init_out_y = static_cast<int>((size_.y / 2) - (_text_lines.size() * font_height / 2));
+		out_x = static_cast<int>(size_.x - longest_line * font_width - _text.GetMarginRight());
+		out_y = static_cast<int>((size_.y / 2) - (text_lines.size() * font_height / 2));
 		break;
 	case TextAlignment::BottomLeft:
-		init_out_x = 4;
-		init_out_y = static_cast<int>(size_.y - 4 - _text_lines.size() * font_height);
+		out_x = _text.GetMarginLeft();
+		out_y = static_cast<int>(size_.y - _text.GetMarginBottom() - text_lines.size() * font_height);
+		break;
+	case TextAlignment::Bottom:
+		out_x = static_cast<int>((size_.x/2) - longest_line * (font_width / 2));
+		out_y = static_cast<int>(size_.y - _text.GetMarginBottom() - text_lines.size() * font_height);
+		break;
+	case TextAlignment::BottomRight:
+		out_x = static_cast<int>(size_.x - longest_line * font_width - _text.GetMarginRight());
+		out_y = static_cast<int>(size_.y - _text.GetMarginBottom() - text_lines.size() * font_height);
+		break;
+	}
+
+	top_left.x = out_x;
+	top_left.y = out_y;
+
+	bottom_right.x = top_left.x + longest_line * font_width;
+	bottom_right.y = top_left.y + static_cast<int>(text_lines.size());
+}
+
+void BlittableRect::BlitText(WidgetText _text)
+{
+	int font_width;
+	int font_height;
+	switch(_text.GetTextSize())
+	{
+	case TextSize::Small:
+		font_width = 10;
+		font_height = 12;
+		break;
+	default:
+	case TextSize::Normal:
+		font_width = 16;
+		font_height = 24;
+		break;
+	}
+	if(!font)
+	{
+		font = IMG_Load("Animations/Font.png");
+	}
+	if(!font || font->w != 256 || font->h != 144)
+	{
+		//TODO error
+		Logger::ErrorOut() << "Unable to font image  Animation/Font.png\n";
+		return;
+	}
+	if(!font_small)
+	{
+		font_small = IMG_Load("Animations/Font_small.png");
+	}
+	if(!font_small || font_small->w != 160 || font_small->h != 72)
+	{
+		//TODO error
+		Logger::ErrorOut() << "Unable to font_small image  Animation/Font_small.png\n";
+		return;
+	}
+
+	int init_out_x = 0;
+	int init_out_y = 0;
+	int longest_line = 0;
+	std::vector<std::string> text_lines = _text.GetTextLines();
+	for(std::vector<std::string>::iterator it = text_lines.begin(); it != text_lines.end(); ++it)
+	{
+		if((int)it->length() > longest_line)
+			longest_line = (int)it->length();
+	}
+
+	switch(_text.GetAlignment())
+	{
+	case TextAlignment::TopLeft:
+		init_out_x = _text.GetMarginLeft();
+		init_out_y = _text.GetMarginTop();
+		break;
+	case TextAlignment::Top:
+		init_out_x = static_cast<int>((size_.x / 2) - longest_line * (font_width / 2));
+		init_out_y = _text.GetMarginTop();
+		break;
+	case TextAlignment::TopRight:
+		init_out_x = static_cast<int>(size_.x - longest_line * font_width - _text.GetMarginRight());
+		init_out_y = _text.GetMarginTop();
+		break;
+	case TextAlignment::Left:
+		init_out_x = _text.GetMarginLeft();
+		init_out_y = static_cast<int>((size_.y / 2) - (text_lines.size() * font_height / 2));
+		break;
+	case TextAlignment::Centre:
+		init_out_x = static_cast<int>((size_.x / 2) - longest_line * (font_width / 2));
+		init_out_y = static_cast<int>((size_.y / 2)  - (text_lines.size() * font_height / 2));
+		break;
+	case TextAlignment::Right:
+		init_out_x = static_cast<int>(size_.x - longest_line * font_width - _text.GetMarginRight());
+		init_out_y = static_cast<int>((size_.y / 2) - (text_lines.size() * font_height / 2));
+		break;
+	case TextAlignment::BottomLeft:
+		init_out_x = _text.GetMarginLeft();
+		init_out_y = static_cast<int>(size_.y - _text.GetMarginBottom() - text_lines.size() * font_height);
 		break;
 	case TextAlignment::Bottom:
 		init_out_x = static_cast<int>((size_.x/2) - longest_line * (font_width / 2));
-		init_out_y = static_cast<int>(size_.y - 4 - _text_lines.size() * font_height);
+		init_out_y = static_cast<int>(size_.y - _text.GetMarginBottom() - text_lines.size() * font_height);
 		break;
 	case TextAlignment::BottomRight:
-		init_out_x = static_cast<int>(size_.x - longest_line * font_width - 4);
-		init_out_y = static_cast<int>(size_.y - 4 - _text_lines.size() * font_height);
+		init_out_x = static_cast<int>(size_.x - longest_line * font_width - _text.GetMarginRight());
+		init_out_y = static_cast<int>(size_.y - _text.GetMarginBottom() - text_lines.size() * font_height);
 		break;
 	}
 	int out_x = init_out_x;
 	int out_y = init_out_y;
 	
-	for(std::vector<std::string>::iterator it = _text_lines.begin(); it != _text_lines.end(); ++it)
+	for(std::vector<std::string>::iterator it = text_lines.begin(); it != text_lines.end(); ++it)
 	{
-		if(_alignment == TextAlignment::Top ||
-		   _alignment == TextAlignment::Centre ||
-		   _alignment == TextAlignment::Bottom)
+		if(_text.GetAlignment() == TextAlignment::Top ||
+		   _text.GetAlignment() == TextAlignment::Centre ||
+		   _text.GetAlignment() == TextAlignment::Bottom)
 		{
 			out_x = static_cast<int>((size_.x / 2) - it->length() * (font_width / 2));
 
-		} else if(_alignment == TextAlignment::TopRight ||
-				  _alignment == TextAlignment::Right ||
-				  _alignment == TextAlignment::BottomRight)
+		} else if(_text.GetAlignment() == TextAlignment::TopRight ||
+				  _text.GetAlignment() == TextAlignment::Right ||
+				  _text.GetAlignment() == TextAlignment::BottomRight)
 		{
 			out_x = static_cast<int>((size_.x / 2) - it->length() * font_width - 4);
 		} else
@@ -592,7 +502,7 @@ void BlittableRect::BlitTextLines(std::vector<std::string> _text_lines, TextAlig
 			dest_rect.y = static_cast<Sint16>(out_y);
 			dest_rect.w = static_cast<Uint16>(font_width);
 			dest_rect.h = static_cast<Uint16>(font_height);
-			switch(text_size_)
+			switch(_text.GetTextSize())
 			{
 			case TextSize::Small:
 				SDL_BlitSurface(font_small, &src_rect, surface_, &dest_rect);

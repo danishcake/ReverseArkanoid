@@ -63,7 +63,6 @@ protected:
 	bool allow_edit_;
 
 	WidgetText widget_text_;
-	TextSize::Enum font_size_;
 	std::string tag_;			//Stores some related name or useful data
 
 	static float screen_fade_;
@@ -215,7 +214,7 @@ public:
 	bool HasEditting();
 	void SetEditting(bool _editting);
 	std::string GetText(){return widget_text_.GetText();}
-	void SetTextSize(TextSize::Enum _text_size){font_size_ = _text_size;}
+	void SetTextSize(TextSize::Enum _text_size){widget_text_.SetTextSize(_text_size);}
 
 	/* Screen fading */
 	static void SetFade(float _fade_amount);
