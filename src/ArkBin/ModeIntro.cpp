@@ -29,6 +29,11 @@ ModeAction::Enum ModeIntro::Tick(float dt)
 {
 	if(!mFeedbackWidget->HasModal())
 	{
+		if(mAge > 3.0f && mPendMode == NULL)
+		{
+			mPendMode = new ModeMenu();
+		}
+
 		ModeAction::Enum result = IMode::Tick(dt);
 		Widget::SetFade(mFade);
 		return result;

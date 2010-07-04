@@ -838,7 +838,14 @@ void Widget::SetHighlight()
 	}
 
 	if(rejects_focus_)
+	{
+		if(Widget::widget_with_highlight_)
+		{
+			Widget::widget_with_highlight_->Invalidate();
+			Widget::widget_with_highlight_ = NULL;
+		}
 		return;
+	}
 	if(Widget::widget_with_highlight_ != this)
 	{
 		Widget* pOldWidgetWithHighlight = Widget::widget_with_highlight_;
@@ -1101,14 +1108,19 @@ void Widget::DistributeSDLEvents(SDL_Event* event)
 			widget_with_drag_->OnDragReset(widget_with_drag_, &drag_event_args_);
 		}
 
+		
 		widget_with_drag_ = NULL;
-		widget_with_depression_ = NULL;
-
 		RemoveEventLock();
 		return;
 	}
 
-	
+	if(e.event_type == EventType::MouseUp && e.event.mouse_event.btns == MouseButton::Left &&
+	   widget_with_depression_)
+	{
+		widget_with_depression_->Invalidate();
+		widget_with_depression_ = NULL;
+	}
+
 	if(e.event_type == EventType::MouseUp || e.event_type == EventType::MouseDown)
 	{
 		for(vector<Widget*>::iterator it = root_.begin(); it != root_.end(); ++it)
