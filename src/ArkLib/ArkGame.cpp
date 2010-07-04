@@ -7,7 +7,8 @@ ArkGame::ArkGame(void) :
 	mBounds((float)DEFAULT_BOUNDS_W, (float)DEFAULT_BOUNDS_H),
 	mPhase(GamePhase::Starting),
 	mTimer(0),
-	mPaddle(new Paddle())
+	mPaddle(new Paddle()),
+	mScore(0)
 {
 	mPaddle->SetBounds(mBounds);
 	mPaddle->SetX(mBounds.x / 2 - mPaddle->GetSize().x / 2);
@@ -115,6 +116,10 @@ void ArkGame::TickRunning(float timespan)
 				spawned_balls.push_back(split_ball);
 			}
 			(*ball)->SetVelocity(direction * magnitude);
+
+			//Scoring
+			if(mWall.get())
+				mScore += static_cast<int>(mWall->GetBricks().size()) * BOUNCE_POINTS;
 		}
 	}
 	for(vector<Ball::SharedPointer>::iterator it = spawned_balls.begin(); it != spawned_balls.end(); ++it)
@@ -122,7 +127,12 @@ void ArkGame::TickRunning(float timespan)
 		AddBall(*it);
 	}
 
-	mBalls.erase(std::remove_if(mBalls.begin(), mBalls.end(), Ball::IsRemovable), mBalls.end());;
+	if(mWall.get())
+	{
+		int ball_count = static_cast<int>(mBalls.size());
+		mBalls.erase(std::remove_if(mBalls.begin(), mBalls.end(), Ball::IsRemovable), mBalls.end());
+		mScore += static_cast<int>(mWall->GetBricks().size()) * BOUNCE_POINTS * BALL_POINTS * (ball_count - mBalls.size());
+	}
 	mPaddle->Tick(timespan, mBalls, mWall);
 }
 

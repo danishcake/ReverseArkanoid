@@ -29,6 +29,8 @@ public:
 	static const int DEFAULT_BOUNDS_W = 400;
 	static const int DEFAULT_BOUNDS_H = 480;
 	static const int STARTING_TIME = 2000; //ms
+	static const int BOUNCE_POINTS = 10;
+	static const int BALL_POINTS = 5; //Equivalent to 5 bounces
 //Constructors
 public:
 	ArkGame(void);
@@ -41,6 +43,7 @@ private:
 	Wall::SharedPointer mWall;
 	std::vector<Ball::SharedPointer> mBalls;
 	Paddle::SharedPointer mPaddle;
+	int mScore;
 
 //Public getters/setters
 public:
@@ -56,6 +59,8 @@ public:
 	const std::vector<Ball::SharedPointer> GetBalls() const {return mBalls;}
 
 	Paddle::SharedPointer GetPaddle() const {return mPaddle;}
+
+	int GetScore(){return mScore;}
 
 //Public methods
 public:
