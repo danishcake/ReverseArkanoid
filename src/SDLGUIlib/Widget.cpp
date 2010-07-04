@@ -168,7 +168,7 @@ Widget::Widget(VerticalTile _tiles, int _height)
 
 	back_rect_->Fill(0, 0, 0, 0);
 	toptile.RawBlit(Vector2i(0,0), back_rect_);
-	int center_reps = ceil(static_cast<double>(back_rect_->GetSize().y - toptile.GetSize().y - bottomtile.GetSize().y) / static_cast<double>(middletile.GetSize().y));
+	int center_reps = static_cast<int>(ceil(static_cast<double>(back_rect_->GetSize().y - toptile.GetSize().y - bottomtile.GetSize().y) / static_cast<double>(middletile.GetSize().y)));
 	for(int i = 0; i < center_reps; i++)
 	{
 		middletile.RawBlit(Vector2i(0, i * middletile.GetSize().y + toptile.GetSize().y), back_rect_);
@@ -219,7 +219,7 @@ Widget::Widget(HorizontalTile _tiles, int _width)
 
 	back_rect_->Fill(0, 0, 0, 0);
 	lefttile.RawBlit(Vector2i(0,0), back_rect_);
-	int center_reps = ceil(static_cast<double>(back_rect_->GetSize().x - lefttile.GetSize().x - righttile.GetSize().x) / static_cast<double>(middletile.GetSize().x));
+	int center_reps = static_cast<int>(ceil(static_cast<double>(back_rect_->GetSize().x - lefttile.GetSize().x - righttile.GetSize().x) / static_cast<double>(middletile.GetSize().x)));
 	for(int i = 0; i < center_reps; i++)
 	{
 		middletile.RawBlit(Vector2i(i * middletile.GetSize().x + lefttile.GetSize().x, 0), back_rect_);
@@ -704,11 +704,11 @@ void Widget::HandleEvent(Event _event)
 		if(_event.event.key_event.key_code >= 32 && 
 		   _event.event.key_event.key_code <= 127)
 		{
-			char nc = _event.event.key_event.key_code;
+			char nc = static_cast<char>(_event.event.key_event.key_code);
 			if(_event.event.key_event.key_code >= 65 && _event.event.key_event.key_code <= 90)
-				nc = _event.event.key_event.key_code + ((!_event.event.key_event.shift) ? 32 : 0);
+				nc = static_cast<char>(_event.event.key_event.key_code + ((!_event.event.key_event.shift) ? 32 : 0));
 			if(_event.event.key_event.key_code >= 97 && _event.event.key_event.key_code <= 122)
-				nc = _event.event.key_event.key_code + (_event.event.key_event.shift ? -32 : 0);
+				nc = static_cast<char>(_event.event.key_event.key_code + (_event.event.key_event.shift ? -32 : 0));
 			std::string cur_text = widget_text_.GetText();
 			cur_text = cur_text + nc;
 			widget_text_.SetText(cur_text);
@@ -1070,7 +1070,7 @@ void Widget::DistributeSDLEvents(SDL_Event* event)
 		{
 			e.event_type = EventType::OtherKeypress;
 		}
-		e.event.key_event.shift = SDL_GetModState() & (KMOD_RSHIFT | KMOD_LSHIFT);
+		e.event.key_event.shift = (SDL_GetModState() & (KMOD_RSHIFT | KMOD_LSHIFT)) != 0 ? 1 : 0;
 	} else if(event->type == SDL_MOUSEMOTION)
 	{
 		e.event_type = EventType::MouseMove;

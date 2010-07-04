@@ -4,7 +4,7 @@
 #include <boost/signal.hpp>
 #include <boost/bind.hpp>
 #include "Event.h"
-#include "TextAlignment.h"
+#include "WidgetText.h"
 #include "BlittableRect.h"
 #include "Tiling.h"
 #include <sdl.h>

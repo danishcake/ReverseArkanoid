@@ -2,7 +2,7 @@
 #include "vmath.h"
 #include <vector>
 #include <string>
-#include "TextAlignment.h"
+#include "WidgetText.h"
 
 struct SDL_Surface;
 

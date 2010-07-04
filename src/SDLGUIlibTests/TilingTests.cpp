@@ -13,6 +13,7 @@ TEST_FIXTURE(SDL_fixture, VerticalTile)
 		CHECK_EQUAL(TilingType::Vertical, vt.type);
 
 		Widget* tiled = new Widget(vt, 100);
+		CHECK(tiled);
 	}
 }
 
@@ -28,6 +29,7 @@ TEST_FIXTURE(SDL_fixture, HorizontalTile)
 		CHECK_EQUAL(TilingType::Horizontal, ht.type);
 
 		Widget* tiled = new Widget(ht, 100);
+		CHECK(tiled);
 	}
 }
 

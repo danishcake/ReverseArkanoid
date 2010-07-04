@@ -250,10 +250,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\TextAlignment.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Tiling.h"
 				>
 			</File>
@@ -267,6 +263,10 @@
 			</File>
 			<File
 				RelativePath=".\Widget.h"
+				>
+			</File>
+			<File
+				RelativePath=".\WidgetText.h"
 				>
 			</File>
 			<Filter
