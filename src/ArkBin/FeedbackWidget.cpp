@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 #include "FeedbackWidget.h"
+//#include <cstdlib>
+#include <windows.h>
 
 FeedbackWidget::FeedbackWidget(void) : 
 	Widget(NinePatch("NavyButton.png", 16, 16, 16, 16), Widget::GetScreenSize().x - 32, Widget::GetScreenSize().y - 32),
@@ -39,6 +41,9 @@ FeedbackWidget::FeedbackWidget(void) :
 
 	//Register events
 	back_button->OnClick.connect(boost::bind(&FeedbackWidget::backClick, this, _1));
+	email->OnClick.connect(boost::bind(&FeedbackWidget::emailClick, this, _1));
+	thread->OnClick.connect(boost::bind(&FeedbackWidget::threadClick, this, _1));
+	git_hub->OnClick.connect(boost::bind(&FeedbackWidget::githubClick, this, _1));
 }
 
 FeedbackWidget::~FeedbackWidget(void)
@@ -50,6 +55,24 @@ void FeedbackWidget::backClick(Widget* /*widget*/)
 	SetModal(false);
 	SetVisibility(false);
 	SetPosition(mOffscreenPosition);
+}
+
+void FeedbackWidget::emailClick(Widget* /*widget*/)
+{
+//	system("mailto:danishcake@hotmail.com?subject=ReverseArkanoid feedback");
+	ShellExecute(NULL, L"open", L"mailto:danishcake@hotmail.com?subject=ReverseArkanoid feedback", NULL, NULL, SW_SHOWNORMAL);
+}
+
+void FeedbackWidget::threadClick(Widget* /*widget*/)
+{
+//	system("http://forums.somethingawful.com/showthread.php?threadid=3310460&goto=lastpost");
+	ShellExecute(NULL, L"open", L"http://forums.somethingawful.com/showthread.php?threadid=3310460&goto=lastpost", NULL, NULL, SW_SHOWNORMAL);
+}
+
+void FeedbackWidget::githubClick(Widget* /*widget*/)
+{
+//	system("http://github.com/danishcake/ReverseArkanoid");
+	ShellExecute(NULL, L"open", L"http://github.com/danishcake/ReverseArkanoid", NULL, NULL, SW_SHOWNORMAL);
 }
 
 void FeedbackWidget::Show()
