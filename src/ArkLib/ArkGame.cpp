@@ -89,7 +89,7 @@ void ArkGame::Tick(float timespan)
 	switch(mPhase)
 	{
 	case GamePhase::Starting:
-		if(mTimer >= STARTING_TIME)
+		if(mTimer >= ((float)STARTING_TIME) / 1000.0f)
 		{
 			mPhase = GamePhase::Running;
 			Ball::SharedPointer ball(new Ball());

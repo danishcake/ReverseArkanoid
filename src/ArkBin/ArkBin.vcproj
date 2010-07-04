@@ -53,7 +53,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\include&quot;;&quot;$(SolutionDir)/src/ArkLib&quot;;&quot;$(SolutionDir)/src/SDLGUIlib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0&quot;"
+				AdditionalIncludeDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\include&quot;;&quot;$(SolutionDir)/src/ArkLib&quot;;&quot;$(SolutionDir)/src/SDLGUIlib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -74,9 +74,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="kernel32.lib SDL.lib SDLmain.lib SDL_image.lib SDLGUIlib.lib Arklib.lib $(NOINHERIT)"
+				AdditionalDependencies="tinyxmld_STL.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\lib&quot;;&quot;$(SolutionDir)/lib/$(ConfigurationName)&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\lib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\lib&quot;;&quot;$(SolutionDir)/lib/$(ConfigurationName)&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\lib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0\lib&quot;;&quot;$(PROGRAMFILES)\tinyxml\Debug_STL&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -141,7 +141,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\include&quot;&quot;$(SolutionDir)/src/SDLGUIlib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0&quot;"
+				AdditionalIncludeDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\include&quot;;&quot;$(SolutionDir)/src/ArkLib&quot;;&quot;$(SolutionDir)/src/SDLGUIlib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -160,9 +160,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="kernel32.lib SDL.lib SDLmain.lib SDL_image.lib SDLGUIlib.lib $(NOINHERIT)"
+				AdditionalDependencies="tinyxml_STL.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\lib&quot;;&quot;$(SolutionDir)/lib/$(ConfigurationName)&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\lib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\lib&quot;;&quot;$(SolutionDir)/lib/$(ConfigurationName)&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\lib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0\lib&quot;;&quot;$(PROGRAMFILES)\tinyxml\Release_STL&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -251,6 +251,22 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Animation"
+				>
+				<File
+					RelativePath=".\SDLAnimationFrame.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SDLTextureManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\StandardTextures.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -282,6 +298,22 @@
 				</File>
 				<File
 					RelativePath=".\ModeMenu.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Animation"
+				>
+				<File
+					RelativePath=".\SDLAnimationFrame.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SDLTextureManager.h"
+					>
+				</File>
+				<File
+					RelativePath=".\StandardTextures.h"
 					>
 				</File>
 			</Filter>
@@ -329,6 +361,50 @@
 					</File>
 					<File
 						RelativePath=".\GUI\NavyButton.png"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="Sprites"
+				>
+				<Filter
+					Name="Ball"
+					>
+					<File
+						RelativePath=".\Sprites\Ball.animation"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprites\Ball.png"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Bricks"
+					>
+					<File
+						RelativePath=".\Sprites\BlueBrick.animation"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprites\BlueBrick.png"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprites\BlueBrickDamaged.png"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprites\RedBrick.animation"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprites\RedBrick.png"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprites\RedBrickDamaged.png"
 						>
 					</File>
 				</Filter>

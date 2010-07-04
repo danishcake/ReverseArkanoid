@@ -3,12 +3,22 @@
 #include "ModeMenu.h"
 #include <Widget.h>
 #include "FeedbackWidget.h"
+#include "StandardTextures.h"
 
 using std::vector;
 
 ModeGame::ModeGame() :
 	mGame(new ArkGame())
 {
+	Wall::SharedPointer wall(new Wall());
+	Brick::SharedPointer brick(new Brick(BrickType::RedBrick));
+	brick->SetPosition(Vector2f(-20, 0));
+	Brick::SharedPointer brick2(new Brick(BrickType::BlueBrick));
+	brick2->SetPosition(Vector2f(20, 0));
+	wall->AddBrick(brick);
+	wall->AddBrick(brick2);
+
+	mGame->SetWall(wall);
 }
 
 IMode* ModeGame::Teardown()
@@ -57,14 +67,34 @@ void ModeGame::Draw(SDL_Surface* screenSurface)
 	vector<Ball::SharedPointer> balls = mGame->GetBalls();
 	for(vector<Ball::SharedPointer>::iterator ball = balls.begin(); ball != balls.end(); ++ball)
 	{
-
+		Vector2i inverted_y = (*ball)->GetPosition();
+		inverted_y.y = 480 - inverted_y.y;
+		StandardTextures::ball_animation->GetCurrentFrame()->Draw(inverted_y);
 	}
 	if(mGame->GetWall().get())
 	{
-		vector<Brick::SharedPointer> bricks = mGame->GetWall()->GetBricks();
+		Wall::SharedPointer wall = mGame->GetWall();
+		vector<Brick::SharedPointer> bricks = wall->GetBricks();
 		for(vector<Brick::SharedPointer>::iterator brick = bricks.begin(); brick != bricks.end(); ++brick)
 		{
+			Animation* sprite;
+			switch((*brick)->GetBrickType())
+			{
+			default:
+			case BrickType::BlueBrick:
+				sprite = StandardTextures::blue_brick_animation[0];
+				break;
+			case BrickType::RedBrick:
+				sprite = StandardTextures::red_brick_animation[0];
+				break;
+			case BrickType::YellowBrick:
+				sprite = StandardTextures::red_brick_animation[0]; //TODO add yellow
+				break;
+			}
 
+			Vector2i inverted_y = (*brick)->GetPosition() + wall->GetPosition();
+			inverted_y.y = 480 - inverted_y.y;
+			sprite->GetCurrentFrame()->Draw(inverted_y);
 		}
 	}
 }

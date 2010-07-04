@@ -4,6 +4,8 @@
 #include <Widget.h>
 #include "IMode.h"
 #include "ModeIntro.h"
+#include "StandardTextures.h"
+#include "SDLAnimationFrame.h"
 
 const float targetFrameTime = 0.02f;
 IMode* gameMode = NULL;
@@ -71,6 +73,8 @@ int _tmain(int argc, char* argv[])
 	
 	if(pScreen)
 	{
+		SDLAnimationFrame::screen_ = pScreen;
+		StandardTextures::LoadTextures();
 		gameMode = new ModeIntro();
 		gameMode->Setup();
 

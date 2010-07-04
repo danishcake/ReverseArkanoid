@@ -55,7 +55,7 @@ TEST(GameStartsAfterXSeconds)
 {
 	ArkGame::SharedPointer game(new ArkGame());
 	CHECK_EQUAL(GamePhase::Starting, game->GetPhase());
-	game->Tick(ArkGame::STARTING_TIME);
+	game->Tick(((float)ArkGame::STARTING_TIME) / 1000.0f);
 	CHECK_EQUAL(GamePhase::Running, game->GetPhase());
 }
 
@@ -66,14 +66,14 @@ TEST(Lives)
 TEST(GameCreatesBallAtStart)
 {
 	ArkGame::SharedPointer game(new ArkGame());
-	game->Tick(ArkGame::STARTING_TIME);
+	game->Tick(((float)ArkGame::STARTING_TIME) / 1000.0f);
 	CHECK_EQUAL(1, game->GetBalls().size());
 }
 
 TEST(BallBouncesOnPaddle)
 {
 	ArkGame::SharedPointer game(new ArkGame());
-	game->Tick(ArkGame::STARTING_TIME);
+	game->Tick(((float)ArkGame::STARTING_TIME) / 1000.0f);
 	Ball::SharedPointer ball = game->GetBalls()[0];
 	ball->SetPosition(Vector2f(ball->GetPosition().x, 100));
 	ball->SetVelocity(Vector2f(0, -100));
@@ -95,7 +95,7 @@ TEST(BlocksDestroyedByBall)
 	Brick::SharedPointer brick(new Brick(BrickType::BlueBrick));
 	wall->AddBrick(brick);
 	game->SetWall(wall);
-	game->Tick(ArkGame::STARTING_TIME);
+	game->Tick(((float)ArkGame::STARTING_TIME) / 1000.0f);
 
 	Ball::SharedPointer ball = game->GetBalls()[0];
 	ball->SetPosition(Vector2f(100, 100));

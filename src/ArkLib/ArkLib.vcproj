@@ -39,7 +39,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(PROGRAMFILES)\boost\boost_1_36_0\"
+				AdditionalIncludeDirectories="&quot;$(PROGRAMFILES)\boost\boost_1_36_0\&quot;;&quot;C:\Program Files\tinyxml&quot;"
+				PreprocessorDefinitions="TIXML_USE_STL"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -100,7 +101,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(PROGRAMFILES)\boost\boost_1_36_0\"
+				AdditionalIncludeDirectories="&quot;$(PROGRAMFILES)\boost\boost_1_36_0\&quot;;&quot;C:\Program Files\tinyxml&quot;"
+				PreprocessorDefinitions="TIXML_USE_STL"
 				RuntimeLibrary="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
@@ -175,6 +177,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Animation"
+				>
+				<File
+					RelativePath=".\Animation.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AnimationFrame.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AnimationSet.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\TextureManager.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -218,6 +240,26 @@
 				</File>
 				<File
 					RelativePath=".\Wall.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Animation"
+				>
+				<File
+					RelativePath=".\Animation.h"
+					>
+				</File>
+				<File
+					RelativePath=".\AnimationFrame.h"
+					>
+				</File>
+				<File
+					RelativePath=".\AnimationSet.h"
+					>
+				</File>
+				<File
+					RelativePath=".\TextureManager.h"
 					>
 				</File>
 			</Filter>
