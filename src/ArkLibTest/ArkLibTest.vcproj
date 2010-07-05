@@ -13,11 +13,14 @@
 		/>
 	</Platforms>
 	<ToolFiles>
+		<DefaultToolFile
+			FileName="ArkCopier.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)\bin\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)\bin\$(ProjectName)\$(ConfigurationName)"
 			IntermediateDirectory="$(SolutionDir)\obj\$(ProjectName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -26,10 +29,19 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="Animation xml copier"
+			/>
+			<Tool
+				Name="Animation png copier"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
 				Description="Running unit tests"
-				CommandLine="&quot;$(TargetPath)&quot;&#x0D;&#x0A;"
+				CommandLine="RunDebug.bat"
 				Outputs="$(SolutionDir)\FileThatDoesntExist.txt"
+			/>
+			<Tool
+				Name="Level copier"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -64,9 +76,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ArkLib.lib UnitTest++.vsnet2005d.lib"
+				AdditionalDependencies="ArkLib.lib UnitTest++.vsnet2005d.lib tinyxmld_STL.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)\src\UnitTest++Redist\lib&quot;;&quot;$(SolutionDir)\lib\$(ConfigurationName)&quot;"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)\src\UnitTest++Redist\lib&quot;;&quot;$(SolutionDir)\lib\$(ConfigurationName)&quot;;&quot;$(PROGRAMFILES)\tinyxml\Debug_STL&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -99,7 +111,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)\bin\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)\bin\$(ProjectName)\$(ConfigurationName)"
 			IntermediateDirectory="$(SolutionDir)\obj\$(ProjectName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -109,10 +121,19 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="Animation xml copier"
+			/>
+			<Tool
+				Name="Animation png copier"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
 				Description="Running unit tests"
-				CommandLine="&quot;$(TargetPath)&quot;&#x0D;&#x0A;"
+				CommandLine="RunRelease.bat"
 				Outputs="$(SolutionDir)\FileThatDoesntExist.txt"
+			/>
+			<Tool
+				Name="Level copier"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -144,9 +165,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ArkLib.lib UnitTest++.vsnet2005.lib"
+				AdditionalDependencies="ArkLib.lib UnitTest++.vsnet2005.lib tinyxml_STL.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)\src\UnitTest++Redist\lib&quot;;&quot;$(SolutionDir)\lib\$(ConfigurationName)&quot;"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)\src\UnitTest++Redist\lib&quot;;&quot;$(SolutionDir)\lib\$(ConfigurationName)&quot;;&quot;$(PROGRAMFILES)\tinyxml\Release_STL&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -220,15 +241,15 @@
 					>
 				</File>
 				<File
-					RelativePath=".\BrickCollectionTests.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\BrickTests.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\GameTests.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\WallTests.cpp"
 					>
 				</File>
 			</Filter>
@@ -240,6 +261,14 @@
 			>
 			<File
 				RelativePath=".\stdafx.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Resources"
+			>
+			<File
+				RelativePath=".\Levels\TestWall.Level"
 				>
 			</File>
 		</Filter>

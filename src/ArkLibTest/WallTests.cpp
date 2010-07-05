@@ -32,3 +32,8 @@ TEST(AddBricks)
 	CHECK_EQUAL(collection->GetBounds().x - Brick::BRICK_WIDTH, collection->GetPosition().x);
 }
 
+TEST(WallFromXML)
+{
+	Wall::SharedPointer wall(new Wall("TestWall.Level"));
+	CHECK_EQUAL(3, wall->GetBricks().size());
+}

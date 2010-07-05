@@ -19,6 +19,7 @@ public:
 //Constructors
 public:
 	Wall(void);
+	Wall(std::string filename);
 	~Wall(void);
 
 //Private members

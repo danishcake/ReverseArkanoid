@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Wall>
+    <Name>Test wall</Name>
+    <Brick x="0" y="0" c="1"/>
+    <Brick x="40" y="0" c="2"/>
+    <Brick x="80" y="0" c="3"/>
+</Wall>
