@@ -1,0 +1,5 @@
+<AnimationSet>
+  <Animation Name="Paddle">
+    <Frame Width="80" Height="20" Top="0" Left="0" File="Paddle.png" Time="0.5"/>
+  </Animation>
+</AnimationSet>

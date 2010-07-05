@@ -111,6 +111,34 @@ TEST(BlocksDestroyedByBall)
 	CHECK_CLOSE(-100, ball->GetVelocity().y, 5);
 }
 
+TEST(BallDoesntDestroyBlocksTooFast)
+{
+	//If a ball overlaps a block it hits it, but it shouldn't hit the same block until it is clear
+
+	ArkGame::SharedPointer game(new ArkGame());
+	
+	Wall::SharedPointer wall(new Wall());
+	Brick::SharedPointer brick(new Brick(BrickType::YellowBrick));
+	wall->AddBrick(brick);
+	wall->SetX(100 - Brick::BRICK_WIDTH/2);
+	game->SetWall(wall);
+
+	CHECK_EQUAL(3, brick->GetLives());
+
+	game->Tick(((float)ArkGame::STARTING_TIME) / 1000.0f);
+
+	Ball::SharedPointer ball = game->GetBalls()[0];
+	ball->SetPosition(Vector2f(100, wall->GetPosition().y - ball->GetRadius() - 1));
+	ball->SetVelocity(Vector2f(0, 1));
+
+	game->Tick(1.1f);
+	CHECK_EQUAL(2, brick->GetLives());
+	//Overlaps by 0.1, so will take 0.1s to move away, so check that lives don't decrement again on small step
+	game->Tick(0.02f);
+	CHECK_EQUAL(2, brick->GetLives());
+
+}
+
 TEST(Scoring)
 {
 }

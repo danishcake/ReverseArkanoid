@@ -17,7 +17,7 @@ public:
 	static const int INITIAL_SPEED = 80;
 	static const int DEFAULT_BOUNDS_W = 400;
 	static const int DEFAULT_BOUNDS_H = 480;
-	static const int INITIAL_RADIUS = 10;
+	static const int INITIAL_RADIUS = 16;
 
 //Constructors
 public:
@@ -29,6 +29,7 @@ private:
 	Vector2f mVelocity;
 	Vector2f mBounds;
 	float mRadius;
+	bool mOverlapping;
 
 //Public getters/setters
 public:
@@ -44,6 +45,9 @@ public:
 
 	float GetRadius() const {return mRadius;}
 	void SetRadius(float radius){mRadius = radius;}
+
+	void SetOverlapping(bool overlapping){mOverlapping = overlapping;}
+	bool GetOverlapping(){return mOverlapping;}
 
 //Public methods
 public:

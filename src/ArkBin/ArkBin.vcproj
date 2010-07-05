@@ -408,6 +408,18 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="Paddle"
+					>
+					<File
+						RelativePath=".\Sprites\Paddle.animation"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprites\Paddle.png"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

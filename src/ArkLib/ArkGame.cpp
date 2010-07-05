@@ -23,6 +23,7 @@ void ArkGame::TickRunning(float timespan)
 		//Advance the ball and bounce off bounds
 		(*ball)->Tick(timespan);
 		//Collide with the wall
+		bool ball_hit = false;
 		if(mWall.get())
 		{
 			Vector2f brick_bounds[5]; //Bounding hull of brick
@@ -40,7 +41,6 @@ void ArkGame::TickRunning(float timespan)
 				int collision_index;
 				if(Collisions2f::CircleIntersectsConvex((*ball)->GetCentre(), (*ball)->GetRadius(), brick_bounds, 5, collision_point, collision_index))
 				{
-//					(*brick)->Hit();
 					Vector2f outward_vector;
 					//Vector2f outward_vector = (*ball)->GetCentre() - collision_point;
 					//outward_vector.normalize();//
@@ -56,10 +56,20 @@ void ArkGame::TickRunning(float timespan)
 						outward_vector = Vector2f(1, 0);
 						break;
 					}
-					(*ball)->Bounce(outward_vector);
+
+					if(!(*ball)->GetOverlapping())
+					{
+						(*ball)->Bounce(outward_vector);
+						(*ball)->SetOverlapping(true);
+						(*brick)->Hit();
+					}
+					ball_hit = true;
 				}
 			}
 		}
+
+		if(!ball_hit)
+			(*ball)->SetOverlapping(false);
 
 
 		//Collide with the paddle

@@ -68,7 +68,7 @@ void ModeGame::Draw(SDL_Surface* screenSurface)
 	for(vector<Ball::SharedPointer>::iterator ball = balls.begin(); ball != balls.end(); ++ball)
 	{
 		Vector2i inverted_y = (*ball)->GetPosition();
-		inverted_y.y = 480 - inverted_y.y;
+		inverted_y.y = 480 - (inverted_y.y + 2 * (*ball)->GetRadius());
 		StandardTextures::ball_animation->GetCurrentFrame()->Draw(inverted_y);
 	}
 	if(mGame->GetWall().get())
@@ -93,10 +93,18 @@ void ModeGame::Draw(SDL_Surface* screenSurface)
 			}
 
 			Vector2i inverted_y = (*brick)->GetPosition() + wall->GetPosition();
-			inverted_y.y = 480 - inverted_y.y;
+			inverted_y.y = 480 - (inverted_y.y + (*brick)->GetSize().y);
 			sprite->GetCurrentFrame()->Draw(inverted_y);
 		}
 	}
+	Paddle::SharedPointer paddle = mGame->GetPaddle();
+	Vector2i inverted_y = paddle->GetPosition();
+	inverted_y.y = 480 - (inverted_y.y + paddle->GetSize().y);
+	StandardTextures::paddle_animation->GetCurrentFrame()->Draw(inverted_y);
+
+	
+
+
 }
 
 void ModeGame::clickBack(Widget* /*widget*/)

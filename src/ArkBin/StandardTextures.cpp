@@ -13,6 +13,7 @@ namespace StandardTextures
 	Animation* ball_animation = 0;
 	Animation* red_brick_animation[2] = {0, 0};
 	Animation* blue_brick_animation[2] = {0, 0};
+	Animation* paddle_animation = 0;
 
 	void LoadTextures()
 	{
@@ -58,12 +59,26 @@ namespace StandardTextures
 		{
 			Logger::ErrorOut() << "Unable to load red brick animations\n";
 		}
+
+		AnimationSet* paddle_animation_set = SDLTextureManager::GetAnimationSet("Paddle.animation");
+		if(paddle_animation_set )
+		{
+			paddle_animation = paddle_animation_set->GetAnimation("Paddle");
+			if(!paddle_animation)
+				Logger::ErrorOut() << "Unable to load paddle animation\n";
+		} else
+		{
+			Logger::ErrorOut() << "Unable to load paddle animations\n";
+		}
 	}
 
 	void TickAnimations(float _dt)
 	{
 		if(ball_animation)
 			ball_animation->Tick(_dt);
+
+		if(paddle_animation)
+			paddle_animation->Tick(_dt);
 		for(int i = 0; i < 2; i++)
 		{
 			if(red_brick_animation[i])

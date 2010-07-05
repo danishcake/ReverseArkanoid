@@ -35,6 +35,7 @@ private:
 	BrickType::Enum mBrickType;
 	Vector2f mSize;
 	Vector2f mPosition;
+	int mLives;
 
 //Public getters/setters
 public:
@@ -43,4 +44,7 @@ public:
 
 	Vector2f GetPosition() const {return mPosition;}
 	void SetPosition(Vector2f position){mPosition = position;}
+
+	int GetLives(){return mLives;}
+	void Hit(){mLives--;}
 };

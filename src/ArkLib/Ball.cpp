@@ -2,7 +2,8 @@
 
 Ball::Ball(void) :
 	mBounds((float)DEFAULT_BOUNDS_W, (float)DEFAULT_BOUNDS_H),
-	mRadius((float)INITIAL_RADIUS)
+	mRadius((float)INITIAL_RADIUS),
+	mOverlapping(false)
 {
 
 }
