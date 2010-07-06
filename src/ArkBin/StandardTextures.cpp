@@ -13,7 +13,9 @@ namespace StandardTextures
 	Animation* ball_animation = 0;
 	Animation* red_brick_animation[2] = {0, 0};
 	Animation* blue_brick_animation[2] = {0, 0};
+	Animation* yellow_brick_animation[3] = {0, 0, 0};
 	Animation* paddle_animation = 0;
+	Animation* ball_trail_animation = 0;
 
 	void LoadTextures()
 	{
@@ -22,10 +24,16 @@ namespace StandardTextures
 		AnimationSet* ball_animation_set = SDLTextureManager::GetAnimationSet("Ball.animation");
 		if(ball_animation_set)
 		{
-			ball_animation = ball_animation_set->GetDefaultAnimation();
+			ball_animation = ball_animation_set->GetAnimation("Ball");
 			if(!ball_animation )
 			{
-				Logger::ErrorOut() << "Unable to load default ball animation\n";
+				Logger::ErrorOut() << "Unable to load ball animation\n";
+			}
+
+			ball_trail_animation = ball_animation_set->GetAnimation("Trail");
+			if(!ball_trail_animation )
+			{
+				Logger::ErrorOut() << "Unable to load ball trail animation\n";
 			}
 		} else
 		{
@@ -49,15 +57,33 @@ namespace StandardTextures
 		AnimationSet* red_brick_animation_set = SDLTextureManager::GetAnimationSet("RedBrick.animation");
 		if(red_brick_animation_set)
 		{
-			red_brick_animation[0] = red_brick_animation_set->GetAnimation("Brick");
-			if(!red_brick_animation[0])
-				Logger::ErrorOut() << "Unable to load red brick undamaged animation\n";
-			red_brick_animation[1] = red_brick_animation_set->GetAnimation("BrickDamaged");
+			red_brick_animation[1] = red_brick_animation_set->GetAnimation("Brick");
 			if(!red_brick_animation[1])
+				Logger::ErrorOut() << "Unable to load red brick undamaged animation\n";
+			red_brick_animation[0] = red_brick_animation_set->GetAnimation("BrickDamaged");
+			if(!red_brick_animation[0])
 				Logger::ErrorOut() << "Unable to load red brick damaged animation\n";
 		} else
 		{
 			Logger::ErrorOut() << "Unable to load red brick animations\n";
+		}
+
+		AnimationSet* yellow_brick_animation_set = SDLTextureManager::GetAnimationSet("YellowBrick.animation");
+		if(yellow_brick_animation_set)
+		{
+			yellow_brick_animation[2] = yellow_brick_animation_set->GetAnimation("Brick");
+			if(!yellow_brick_animation[2])
+				Logger::ErrorOut() << "Unable to load yellow brick undamaged animation\n";
+			yellow_brick_animation[1] = yellow_brick_animation_set->GetAnimation("BrickDamaged");
+			if(!yellow_brick_animation[1])
+				Logger::ErrorOut() << "Unable to load yellow brick damaged animation\n";
+			yellow_brick_animation[0] = yellow_brick_animation_set->GetAnimation("BrickDamaged2");
+			if(!yellow_brick_animation[0])
+				Logger::ErrorOut() << "Unable to load yellow brick damaged 2 animation\n";
+
+		} else
+		{
+			Logger::ErrorOut() << "Unable to load yellow brick animations\n";
 		}
 
 		AnimationSet* paddle_animation_set = SDLTextureManager::GetAnimationSet("Paddle.animation");

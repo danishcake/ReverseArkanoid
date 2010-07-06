@@ -32,6 +32,7 @@ void ModeGame::Setup()
 	mFeedbackWidget = new FeedbackWidget();
 
 	//Attach callback
+	mMouseMoveKeyback = Widget::OnGlobalMouseMove.connect(boost::bind(&ModeGame::mouseMove, this, _1, _2));
 	back->OnClick.connect(boost::bind(&ModeGame::clickBack, this, _1));
 	betaTag->OnClick.connect(boost::bind(&ModeGame::clickBetaTag, this, _1));
 }
@@ -62,6 +63,15 @@ void ModeGame::Draw(SDL_Surface* screenSurface)
 	vector<Ball::SharedPointer> balls = mGame->GetBalls();
 	for(vector<Ball::SharedPointer>::iterator ball = balls.begin(); ball != balls.end(); ++ball)
 	{
+		const std::deque<Vector2f> trail = (*ball)->GetTrail();
+		int frame = 0;
+		for(std::deque<Vector2f>::const_iterator it = trail.begin(); it != trail.end(); ++it)
+		{
+			Vector2i trail_inverted_y = *it + offset;
+			trail_inverted_y .y = 480 - (trail_inverted_y.y + 2 * (*ball)->GetRadius());
+			StandardTextures::ball_trail_animation->GetFrameByIndex(frame++)->Draw(trail_inverted_y);
+		}
+
 		Vector2i inverted_y = (*ball)->GetPosition() + offset;
 		inverted_y.y = 480 - (inverted_y.y + 2 * (*ball)->GetRadius());
 		StandardTextures::ball_animation->GetCurrentFrame()->Draw(inverted_y);
@@ -80,12 +90,13 @@ void ModeGame::Draw(SDL_Surface* screenSurface)
 				sprite = StandardTextures::blue_brick_animation[0];
 				break;
 			case BrickType::RedBrick:
-				sprite = StandardTextures::red_brick_animation[0];
+				sprite = StandardTextures::red_brick_animation[(*brick)->GetLives() - 1];
 				break;
 			case BrickType::YellowBrick:
-				sprite = StandardTextures::red_brick_animation[0]; //TODO add yellow
+				sprite = StandardTextures::yellow_brick_animation[(*brick)->GetLives() - 1];
 				break;
 			}
+			//TODO add damaged
 
 			Vector2i inverted_y = (*brick)->GetPosition() + wall->GetPosition() + offset;
 			inverted_y.y = 480 - (inverted_y.y + (*brick)->GetSize().y);
@@ -107,4 +118,14 @@ void ModeGame::clickBack(Widget* /*widget*/)
 void ModeGame::clickBetaTag(Widget* /*widget*/)
 {
 	((FeedbackWidget*)mFeedbackWidget)->Show();
+}
+
+void ModeGame::mouseMove(Widget* /*widget*/, MouseEventArgs args)
+{
+	Vector2f offset((Widget::GetScreenSize().x - mGame->GetBounds().x) / 2, 0);
+	Wall::SharedPointer wall = mGame->GetWall();
+	if(wall.get())
+	{
+		wall->SetX(args.x - offset.x);
+	}
 }

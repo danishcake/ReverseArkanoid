@@ -16,6 +16,7 @@ private:
 	Widget* mLogo1;
 	Widget* mLogo2;
 	Widget* mFeedbackWidget;
+	boost::signals::scoped_connection mKeyCallback;
 //Private methods
 private:
 	void KeySkip(Widget* /*widget*/, KeyPressEventArgs /*key_args*/);

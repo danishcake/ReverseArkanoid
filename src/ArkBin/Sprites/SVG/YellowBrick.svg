@@ -15,9 +15,9 @@
    sodipodi:version="0.32"
    inkscape:version="0.46"
    version="1.0"
-   sodipodi:docname="RedBrick.svg"
+   sodipodi:docname="YellowBrick.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="C:\Documents and Settings\Edward\My Documents\Visual Studio 2005\Projects\Ark\src\ArkBin\Sprites\RedBrick.png"
+   inkscape:export-filename="C:\Documents and Settings\Edward\My Documents\Visual Studio 2005\Projects\Ark\src\ArkBin\Sprites\YellowBrick.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -25,11 +25,11 @@
     <linearGradient
        id="linearGradient3196">
       <stop
-         style="stop-color:#ffff00;stop-opacity:0.49803922;"
+         style="stop-color:#7f7fff;stop-opacity:0.49803922;"
          offset="0"
          id="stop3198" />
       <stop
-         style="stop-color:#ffff00;stop-opacity:0;"
+         style="stop-color:#7f7fff;stop-opacity:0;"
          offset="1"
          id="stop3200" />
     </linearGradient>
@@ -131,7 +131,7 @@
        height="18"
        width="38"
        id="rect3190"
-       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="opacity:1;fill:#ffd300;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
   <g
      inkscape:groupmode="layer"

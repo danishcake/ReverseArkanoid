@@ -1,6 +1,7 @@
 #pragma once
 #include "IMode.h"
 #include <ArkGame.h>
+#include <Widget.h>
 
 class Widget;
 
@@ -14,10 +15,12 @@ class ModeGame :
 private:
 	ArkGame::SharedPointer mGame;
 	Widget* mFeedbackWidget;
+	boost::signals::scoped_connection mMouseMoveKeyback;
 //Private methods
 private:
 	void clickBack(Widget* /*widget*/);
 	void clickBetaTag(Widget* /*widget*/);
+	void mouseMove(Widget* /*widget*/, MouseEventArgs args);
 	
 public:
 	ModeGame(std::string filename);

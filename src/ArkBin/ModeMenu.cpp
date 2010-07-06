@@ -156,10 +156,10 @@ void ModeMenu::Draw(SDL_Surface* screenSurface)
 				sprite = StandardTextures::blue_brick_animation[0];
 				break;
 			case BrickType::RedBrick:
-				sprite = StandardTextures::red_brick_animation[0];
+				sprite = StandardTextures::red_brick_animation[(*brick)->GetLives() - 1];
 				break;
 			case BrickType::YellowBrick:
-				sprite = StandardTextures::red_brick_animation[0]; //TODO add yellow
+				sprite = StandardTextures::yellow_brick_animation[(*brick)->GetLives() - 1];
 				break;
 			}
 

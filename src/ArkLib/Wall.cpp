@@ -114,13 +114,16 @@ void Wall::SetX(float x)
 {
 	if(x > mBounds.x - mRightEdge)
 		mPosition.x = mBounds.x - mRightEdge;
-	else if(x < mLeftEdge)
-		mPosition.x = mLeftEdge;
+	else if(x < -mLeftEdge)
+		mPosition.x = -mLeftEdge;
 	else
 		mPosition.x = x;
 }
 
 void Wall::Tick()
 {
+	int brick_count = mBricks.size();
 	mBricks.erase(std::remove_if(mBricks.begin(), mBricks.end(), Brick::IsRemovable), mBricks.end());;
+	if(brick_count != mBricks.size())
+		RecalculateBounds();
 }

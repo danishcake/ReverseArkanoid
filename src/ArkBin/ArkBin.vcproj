@@ -379,6 +379,10 @@
 						RelativePath=".\Sprites\Ball.png"
 						>
 					</File>
+					<File
+						RelativePath=".\Sprites\BallTrail.png"
+						>
+					</File>
 				</Filter>
 				<Filter
 					Name="Bricks"
@@ -405,6 +409,22 @@
 					</File>
 					<File
 						RelativePath=".\Sprites\RedBrickDamaged.png"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprites\YellowBrick.animation"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprites\YellowBrick.png"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprites\YellowBrickDamaged.png"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprites\YellowBrickDamaged2.png"
 						>
 					</File>
 				</Filter>

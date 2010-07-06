@@ -2,4 +2,11 @@
   <Animation Name="Ball">
     <Frame Width="32" Height="32" Top="0" Left="0" File="Ball.png" Time="0.5"/>
   </Animation>
+  <Animation Name="Trail">
+	  <Frame Width="32" Height="32" Top="0" Left="0" File="BallTrail.png" Time="0.1"/>
+	  <Frame Width="32" Height="32" Top="0" Left="32" File="BallTrail.png" Time="0.1"/>
+	  <Frame Width="32" Height="32" Top="0" Left="64" File="BallTrail.png" Time="0.1"/>
+	  <Frame Width="32" Height="32" Top="0" Left="96" File="BallTrail.png" Time="0.1"/>
+	  <Frame Width="32" Height="32" Top="0" Left="128" File="BallTrail.png" Time="0.1"/>
+  </Animation>
 </AnimationSet>

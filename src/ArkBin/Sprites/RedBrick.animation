@@ -3,6 +3,6 @@
     <Frame Width="40" Height="20" Top="0" Left="0" File="RedBrick.png" Time="0.5"/>
   </Animation>
   <Animation Name="BrickDamaged">
-    <Frame Width="32" Height="32" Top="0" Left="0" File="RedBrickDamaged.png" Time="0.5"/>
+    <Frame Width="40" Height="20" Top="0" Left="0" File="RedBrickDamaged.png" Time="0.5"/>
   </Animation>
 </AnimationSet>

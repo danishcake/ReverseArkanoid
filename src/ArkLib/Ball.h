@@ -2,6 +2,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
 #include "vmath.h"
+#include <deque>
 
 /* The Ball class bounces around within a container and should destroy blocks it
  * comes into contact with
@@ -22,6 +23,8 @@ public:
 	static const int INITIAL_RADIUS = 16;
 	static const int BOUNCE_ACCELERATION = 25;
 	static const int MAXIMUM_SPEED = 400;
+	static const int TRAIL_LENGTH = 5;
+	static const int TRAIL_SEGMENT_TIME = 30; //ms
 
 //Constructors
 public:
@@ -34,7 +37,9 @@ private:
 	Vector2f mBounds;
 	float mRadius;
 	bool mOverlapping;
-
+	std::deque<Vector2f> mTrail;
+	float mTrailTime;
+	Vector2f mTrailOffset;
 //Public getters/setters
 public:
 	Vector2f GetPosition() const {return mPosition;}
@@ -50,8 +55,11 @@ public:
 	float GetRadius() const {return mRadius;}
 	void SetRadius(float radius){mRadius = radius;}
 
+	bool GetOverlapping() const {return mOverlapping;}
 	void SetOverlapping(bool overlapping){mOverlapping = overlapping;}
-	bool GetOverlapping(){return mOverlapping;}
+	
+
+	const std::deque<Vector2f> GetTrail() const {return mTrail;}
 
 //Public methods
 public:

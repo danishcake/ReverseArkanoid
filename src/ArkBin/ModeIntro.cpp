@@ -21,7 +21,7 @@ void ModeIntro::Setup()
 	mFeedbackWidget = new FeedbackWidget();
 
 	//Attach callback
-	Widget::OnGlobalKeyUp.connect(boost::bind(&ModeIntro::KeySkip, this, _1, _2));
+	mKeyCallback = Widget::OnGlobalKeyUp.connect(boost::bind(&ModeIntro::KeySkip, this, _1, _2));
 	betaTag->OnClick.connect(boost::bind(&ModeIntro::clickBetaTag, this, _1));
 }
 

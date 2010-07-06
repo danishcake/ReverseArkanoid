@@ -8,9 +8,10 @@ bool Ball::IsRemovable(SharedPointer ball)
 Ball::Ball(void) :
 	mBounds((float)DEFAULT_BOUNDS_W, (float)DEFAULT_BOUNDS_H),
 	mRadius((float)INITIAL_RADIUS),
-	mOverlapping(false)
+	mOverlapping(false),
+	mTrailTime(0),
+	mTrailOffset(0, 0)
 {
-
 }
 
 Ball::~Ball(void)
@@ -20,11 +21,13 @@ Ball::~Ball(void)
 
 void Ball::Start()
 {
+	mTrail.clear();
 	mVelocity = Vector2f(0, (float)INITIAL_SPEED);
 }
 
 void Ball::Tick(float timespan)
 {
+	Vector2f ltv_position = mPosition;
 	mPosition += mVelocity * timespan;
 	//Constrain and bounce in bounds
 	if(mPosition.y + mRadius > mBounds.y && mVelocity.y > 0)
@@ -42,6 +45,29 @@ void Ball::Tick(float timespan)
 	{
 		mPosition.x = mBounds.x - mRadius;
 		mVelocity.x *= -1;
+	}
+
+	//Filthy hackish way to get a trail
+	//Add a trail segment every 50ms so total trail 250ms long irespective of frame rate
+	mTrailTime += timespan;
+	if(mTrailTime > ((float)TRAIL_SEGMENT_TIME) / 1000.0f)
+	{
+		mTrail.push_front(mPosition);
+		if(mTrail.size() == TRAIL_LENGTH + 1)
+			mTrail.pop_back();
+		mTrailTime = 0;
+		for(std::deque<Vector2f>::iterator it = mTrail.begin(); it != mTrail.end(); ++it)
+		{
+			*it -= mTrailOffset;
+		}
+		mTrailOffset = Vector2f(0, 0);
+	} else //In between updates move all frames along, but at update undo the integration
+	{
+		mTrailOffset += (mPosition - ltv_position);
+		for(std::deque<Vector2f>::iterator it = mTrail.begin(); it != mTrail.end(); ++it)
+		{
+			*it += (mPosition - ltv_position);
+		}
 	}
 }
 

@@ -9,15 +9,15 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="32"
+   width="160"
    height="32"
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.46"
    version="1.0"
-   sodipodi:docname="Ball.svg"
+   sodipodi:docname="BallTrail.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="C:\Documents and Settings\Edward\My Documents\Visual Studio 2005\Projects\Ark\src\ArkBin\Sprites\Ball.png"
+   inkscape:export-filename="C:\Documents and Settings\Edward\My Documents\Visual Studio 2005\Projects\Ark\src\ArkBin\Sprites\BallTrail.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -60,15 +60,6 @@
        x2="15.125"
        y2="10.75"
        gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3819"
-       id="linearGradient3829"
-       gradientUnits="userSpaceOnUse"
-       x1="23.625"
-       y1="25.625"
-       x2="16.1875"
-       y2="8.625" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -80,17 +71,19 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="15.839192"
-     inkscape:cx="12.023637"
-     inkscape:cy="16.329655"
+     inkscape:zoom="3.9933812"
+     inkscape:cx="97.694014"
+     inkscape:cy="16.331321"
      inkscape:document-units="px"
-     inkscape:current-layer="layer5"
+     inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:snap-bbox="true"
      inkscape:window-width="1180"
      inkscape:window-height="742"
      inkscape:window-x="92"
-     inkscape:window-y="0">
+     inkscape:window-y="0"
+     showguides="true"
+     inkscape:guide-bbox="true">
     <inkscape:grid
        type="xygrid"
        id="grid2383"
@@ -113,45 +106,68 @@
      inkscape:label="Fill"
      inkscape:groupmode="layer"
      id="layer1"
-     sodipodi:insensitive="true">
+     transform="translate(-1.000001,-1)">
     <path
        sodipodi:type="arc"
-       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:1;fill:#00ffff;fill-opacity:0.19607843;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path2385"
        sodipodi:cx="15"
        sodipodi:cy="15"
        sodipodi:rx="15"
        sodipodi:ry="15"
        d="M 30,15 A 15,15 0 1 1 0,15 A 15,15 0 1 1 30,15 z"
-       transform="matrix(0.9999999,0,0,0.9705883,1.000001,1)" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer5"
-     inkscape:label="Highlight">
+       transform="matrix(1.0666667,0,0,1.0666667,1.000001,1)" />
     <path
-       sodipodi:type="inkscape:offset"
-       inkscape:radius="1.7646109"
-       inkscape:original="M 15 3.875 C 8.8133736 3.875 3.875 8.8133736 3.875 15 C 3.875 21.186626 8.8133736 26.125 15 26.125 C 21.186626 26.125 26.125 21.186626 26.125 15 C 26.125 8.8133736 21.186626 3.875 15 3.875 z "
-       style="opacity:1;fill:url(#linearGradient3829);fill-opacity:1;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path3827"
-       d="M 15,2.125 C 7.8743257,2.125 2.125,7.8743257 2.125,15 C 2.125,22.125674 7.8743256,27.875 15,27.875 C 22.125674,27.875 27.875,22.125674 27.875,15 C 27.875,7.8743256 22.125674,2.125 15,2.125 z"
-       transform="matrix(0.9411765,0,0,0.9411765,1.764705,1.8823525)" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer4"
-     inkscape:label="Outline"
-     sodipodi:insensitive="true">
+       transform="matrix(1.0666667,0,0,1.0666667,33.000001,1)"
+       d="M 30,15 A 15,15 0 1 1 0,15 A 15,15 0 1 1 30,15 z"
+       sodipodi:ry="15"
+       sodipodi:rx="15"
+       sodipodi:cy="15"
+       sodipodi:cx="15"
+       id="path3201"
+       style="opacity:1;fill:#00ffff;fill-opacity:0.15686275;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       sodipodi:type="arc" />
     <path
        sodipodi:type="arc"
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:2.125;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path3810"
+       style="opacity:1;fill:#00ffff;fill-opacity:0.11764706;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3203"
        sodipodi:cx="15"
        sodipodi:cy="15"
        sodipodi:rx="15"
        sodipodi:ry="15"
        d="M 30,15 A 15,15 0 1 1 0,15 A 15,15 0 1 1 30,15 z"
-       transform="matrix(0.9990617,0,0,0.99802,1.0609496,1.0609496)" />
+       transform="matrix(1.0666667,0,0,1.0666667,65.000001,1)" />
+    <path
+       transform="matrix(1.0666667,0,0,1.0666667,97.000001,1)"
+       d="M 30,15 A 15,15 0 1 1 0,15 A 15,15 0 1 1 30,15 z"
+       sodipodi:ry="15"
+       sodipodi:rx="15"
+       sodipodi:cy="15"
+       sodipodi:cx="15"
+       id="path3205"
+       style="opacity:1;fill:#00ffff;fill-opacity:0.07843138;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       sodipodi:type="arc" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#00ffff;fill-opacity:0.03921569;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3207"
+       sodipodi:cx="15"
+       sodipodi:cy="15"
+       sodipodi:rx="15"
+       sodipodi:ry="15"
+       d="M 30,15 A 15,15 0 1 1 0,15 A 15,15 0 1 1 30,15 z"
+       transform="matrix(1.0666667,0,0,1.0666667,129,1)" />
   </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Highlight"
+     sodipodi:insensitive="true"
+     transform="translate(-1.000001,-1)" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Outline"
+     sodipodi:insensitive="true"
+     transform="translate(-1.000001,-1)" />
 </svg>

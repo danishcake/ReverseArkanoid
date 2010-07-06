@@ -6,6 +6,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="40"
@@ -16,11 +17,22 @@
    version="1.0"
    sodipodi:docname="RedBrickDamaged.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="C:\Documents and Settings\Edward\My Documents\Visual Studio 2005\Projects\Ark\src\ArkBin\Sprites\RedBrick.png"
+   inkscape:export-filename="C:\Documents and Settings\Edward\My Documents\Visual Studio 2005\Projects\Ark\src\ArkBin\Sprites\RedBrickDamaged.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
      id="defs4">
+    <linearGradient
+       id="linearGradient3196">
+      <stop
+         style="stop-color:#ffff00;stop-opacity:0.49803922;"
+         offset="0"
+         id="stop3198" />
+      <stop
+         style="stop-color:#ffff00;stop-opacity:0;"
+         offset="1"
+         id="stop3200" />
+    </linearGradient>
     <linearGradient
        id="linearGradient3165">
       <stop
@@ -39,6 +51,24 @@
        inkscape:vp_z="744.09448 : 526.18109 : 1"
        inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
        id="perspective10" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3165"
+       id="linearGradient3171"
+       x1="19.25"
+       y1="23.5"
+       x2="2.2499998"
+       y2="-10.5"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3196"
+       id="linearGradient3202"
+       x1="20"
+       y1="16"
+       x2="20"
+       y2="8"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -50,17 +80,17 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6568542"
-     inkscape:cx="2.292799"
-     inkscape:cy="34.391026"
+     inkscape:zoom="11.313708"
+     inkscape:cx="16.372166"
+     inkscape:cy="8.5511454"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="true"
      inkscape:snap-bbox="true"
      inkscape:window-width="1180"
      inkscape:window-height="742"
-     inkscape:window-x="96"
-     inkscape:window-y="-4">
+     inkscape:window-x="92"
+     inkscape:window-y="0">
     <inkscape:grid
        type="xygrid"
        id="grid2383"
@@ -80,11 +110,12 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
+     inkscape:label="Fill"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     sodipodi:insensitive="true">
     <rect
-       style="opacity:1;fill:#962020;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:1;fill:#2020e0;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3213"
        width="38"
        height="18"
@@ -92,5 +123,37 @@
        y="1"
        ry="7.0710678"
        rx="6.9384851" />
+    <rect
+       rx="6.9384851"
+       ry="7.0710678"
+       y="1"
+       x="1"
+       height="18"
+       width="38"
+       id="rect3190"
+       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Shading"
+     sodipodi:insensitive="true">
+    <path
+       sodipodi:type="inkscape:offset"
+       inkscape:radius="-2.3817606"
+       inkscape:original="M 7.9375 1 C 4.0935792 1 1 4.1451284 1 8.0625 L 1 11.9375 C 1 15.854872 4.0935792 19 7.9375 19 L 32.0625 19 C 35.906421 19 39 15.854872 39 11.9375 L 39 8.0625 C 39 4.1451284 35.90642 1 32.0625 1 L 7.9375 1 z "
+       style="opacity:1;fill:url(#linearGradient3202);fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3194"
+       d="M 7.9375,3.375 C 5.3927636,3.375 3.375,5.3990585 3.375,8.0625 L 3.375,11.9375 C 3.375,14.600942 5.3927634,16.625 7.9375,16.625 L 32.0625,16.625 C 34.607237,16.625 36.625,14.600942 36.625,11.9375 L 36.625,8.0625 C 36.625,5.3990588 34.607235,3.375 32.0625,3.375 L 7.9375,3.375 z" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Outline">
+    <path
+       style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
+       d="M 7.9384851,1 L 11,2 L 14,2 L 16.984621,1 L 20,2 L 23.015379,1 L 28,2 L 30,1 L 32.061515,1 C 35.905436,1 39,4.1536962 39,8.0710678 L 39,11.928932 C 39,15.846304 35.905436,19 32.061515,19 L 28,18 L 26.030758,19 L 23,18 L 20,19 L 13,18 L 12,19 L 11,18 L 7.9384851,19 C 4.0945644,19 1,15.846304 1,11.928932 L 1,8.0710678 C 1,4.1536962 4.0945644,1 7.9384851,1 z"
+       id="rect2415"
+       sodipodi:nodetypes="ccccccccccccccccccccccc" />
   </g>
 </svg>

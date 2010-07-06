@@ -17,11 +17,22 @@
    version="1.0"
    sodipodi:docname="BlueBrick.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="C:\Documents and Settings\Edward\My Documents\Visual Studio 2005\Projects\Ark\src\ArkBin\Sprites\Ball.png"
+   inkscape:export-filename="C:\Documents and Settings\Edward\My Documents\Visual Studio 2005\Projects\Ark\src\ArkBin\Sprites\BlueBrick.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
      id="defs4">
+    <linearGradient
+       id="linearGradient3196">
+      <stop
+         style="stop-color:#00ffff;stop-opacity:0.49803922;"
+         offset="0"
+         id="stop3198" />
+      <stop
+         style="stop-color:#00ffff;stop-opacity:0;"
+         offset="1"
+         id="stop3200" />
+    </linearGradient>
     <linearGradient
        id="linearGradient3165">
       <stop
@@ -49,6 +60,15 @@
        x2="2.2499998"
        y2="-10.5"
        gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3196"
+       id="linearGradient3202"
+       x1="20"
+       y1="16"
+       x2="20"
+       y2="8"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -60,17 +80,17 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="-251.29822"
-     inkscape:cy="136.14091"
+     inkscape:zoom="5.6568542"
+     inkscape:cx="-10.175238"
+     inkscape:cy="8.3996481"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer3"
      showgrid="true"
      inkscape:snap-bbox="true"
      inkscape:window-width="1180"
      inkscape:window-height="742"
-     inkscape:window-x="96"
-     inkscape:window-y="-4">
+     inkscape:window-x="92"
+     inkscape:window-y="0">
     <inkscape:grid
        type="xygrid"
        id="grid2383"
@@ -90,11 +110,11 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
+     inkscape:label="Fill"
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="opacity:1;fill:#2020e0;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:1;fill:#2020e0;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3213"
        width="38"
        height="18"
@@ -102,5 +122,40 @@
        y="1"
        ry="7.0710678"
        rx="6.9384851" />
+    <rect
+       rx="6.9384851"
+       ry="7.0710678"
+       y="1"
+       x="1"
+       height="18"
+       width="38"
+       id="rect3190"
+       style="opacity:1;fill:#2020e0;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Shading">
+    <path
+       sodipodi:type="inkscape:offset"
+       inkscape:radius="-2.3817606"
+       inkscape:original="M 7.9375 1 C 4.0935792 1 1 4.1451284 1 8.0625 L 1 11.9375 C 1 15.854872 4.0935792 19 7.9375 19 L 32.0625 19 C 35.906421 19 39 15.854872 39 11.9375 L 39 8.0625 C 39 4.1451284 35.90642 1 32.0625 1 L 7.9375 1 z "
+       style="opacity:1;fill:url(#linearGradient3202);fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3194"
+       d="M 7.9375,3.375 C 5.3927636,3.375 3.375,5.3990585 3.375,8.0625 L 3.375,11.9375 C 3.375,14.600942 5.3927634,16.625 7.9375,16.625 L 32.0625,16.625 C 34.607237,16.625 36.625,14.600942 36.625,11.9375 L 36.625,8.0625 C 36.625,5.3990588 34.607235,3.375 32.0625,3.375 L 7.9375,3.375 z" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Outline">
+    <rect
+       rx="6.9384851"
+       ry="7.0710678"
+       y="1"
+       x="1"
+       height="18"
+       width="38"
+       id="rect2415"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
 </svg>
