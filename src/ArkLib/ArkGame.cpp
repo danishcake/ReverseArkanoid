@@ -10,6 +10,7 @@ ArkGame::ArkGame(void) :
 	mPaddle(new Paddle())
 {
 	mPaddle->SetBounds(mBounds);
+	mPaddle->SetX(mBounds.x / 2 - mPaddle->GetSize().x / 2);
 }
 
 ArkGame::~ArkGame(void)
@@ -18,6 +19,7 @@ ArkGame::~ArkGame(void)
 
 void ArkGame::TickRunning(float timespan)
 {
+	vector<Ball::SharedPointer> spawned_balls;
 	for(vector<Ball::SharedPointer>::iterator ball = mBalls.begin(); ball != mBalls.end(); ++ball)
 	{
 		//Advance the ball and bounce off bounds
@@ -66,6 +68,7 @@ void ArkGame::TickRunning(float timespan)
 					ball_hit = true;
 				}
 			}
+			mWall->Tick();
 		}
 
 		if(!ball_hit)
@@ -86,9 +89,40 @@ void ArkGame::TickRunning(float timespan)
 			Vector2f outward_vector = (*ball)->GetCentre() - (mPaddle->GetCentre() + down_bias);
 			outward_vector.normalize();
 			(*ball)->Bounce(outward_vector);
-		}
+			//Apply acceleration
 
+			Vector2f direction = (*ball)->GetVelocity();
+			float magnitude = direction.length();
+			direction.normalize();
+			magnitude += Ball::BOUNCE_ACCELERATION;
+			if(magnitude > Ball::MAXIMUM_SPEED)
+			{
+				Vector2f split_direction;
+				magnitude = Ball::INITIAL_SPEED;
+				if(direction.x < 0)
+					direction.x -= 0.2f;
+				else
+					direction.x += 0.2f;
+
+				direction.normalize();
+				split_direction = direction;
+				split_direction.x *= -1;
+
+
+				Ball::SharedPointer split_ball(new Ball());
+				split_ball->SetPosition((*ball)->GetPosition());
+				split_ball->SetVelocity(split_direction * (magnitude + 2 * Ball::BOUNCE_ACCELERATION));
+				spawned_balls.push_back(split_ball);
+			}
+			(*ball)->SetVelocity(direction * magnitude);
+		}
 	}
+	for(vector<Ball::SharedPointer>::iterator it = spawned_balls.begin(); it != spawned_balls.end(); ++it)
+	{
+		AddBall(*it);
+	}
+
+	mBalls.erase(std::remove_if(mBalls.begin(), mBalls.end(), Ball::IsRemovable), mBalls.end());;
 	mPaddle->Tick(timespan, mBalls, mWall);
 }
 
@@ -103,7 +137,7 @@ void ArkGame::Tick(float timespan)
 		{
 			mPhase = GamePhase::Running;
 			Ball::SharedPointer ball(new Ball());
-			ball->SetPosition(mPaddle->GetCentre() + Vector2f(0, ball->GetRadius() + (mPaddle->GetSize().y / 2.0f)));
+			ball->SetPosition(mPaddle->GetCentre() + Vector2f(-ball->GetRadius(), ball->GetRadius() + (mPaddle->GetSize().y / 2.0f)));
 			ball->Start();
 			AddBall(ball);
 		}
@@ -134,6 +168,8 @@ void ArkGame::SetWall(Wall::SharedPointer wall)
 {
 	mWall = wall;
 	mWall->SetBounds(mBounds);
+	mWall->SetY(Wall::FIXED_Y - mWall->GetTopEdge());
+	mWall->SetX(mBounds.x / 2 - (mWall->GetRightEdge() + mWall->GetLeftEdge()) / 2);
 }
 
 void ArkGame::AddBall(Ball::SharedPointer ball)

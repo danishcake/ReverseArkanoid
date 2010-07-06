@@ -20,7 +20,7 @@ private:
 	void clickBetaTag(Widget* /*widget*/);
 	
 public:
-	ModeGame();
+	ModeGame(std::string filename);
 
 	virtual IMode* Teardown();
 	virtual void Setup();

@@ -49,7 +49,7 @@ TEST(BallBounceWalls)
 	ball->Tick((float)Ball::DEFAULT_BOUNDS_H / (float)Ball::INITIAL_SPEED);
 	
 	CHECK_EQUAL(Vector2f(200, Ball::DEFAULT_BOUNDS_H - Ball::INITIAL_RADIUS), ball->GetPosition());
-	CHECK_EQUAL(Vector2f(0, -80), ball->GetVelocity());
+	CHECK_EQUAL(Vector2f(0, -Ball::INITIAL_SPEED), ball->GetVelocity());
 
 	ball->SetVelocity(Vector2f(-200, -50));
 	ball->Tick(1.0f);

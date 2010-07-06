@@ -15,12 +15,15 @@ public:
 	typedef boost::weak_ptr<Paddle> WeakPointer;
 //Constants
 public:
-	static const int INITIAL_X = 200;
+	static const int INITIAL_X = 160;
 	static const int FIXED_Y = 40;
 	static const int DEFAULT_BOUNDS_W = 400;
 	static const int DEFAULT_BOUNDS_H = 480;
 	static const int PADDLE_WIDTH = 80;
 	static const int PADDLE_HEIGHT = 20;
+
+	static const int PADDLE_MAX_SPEED = 600;
+	static const int PADDLE_ACCELERATION = 200;
 //Constructors
 public:
 	Paddle(void);
@@ -29,6 +32,8 @@ private:
 	Vector2f mBounds;
 	Vector2f mPosition;
 	Vector2f mSize;
+	float mVelocity;
+	float mTargetOffset;
 
 //Public getters/setters
 public:
@@ -38,6 +43,8 @@ public:
 	Vector2f GetPosition() const {return mPosition;}
 	Vector2f GetCentre() const {return mPosition + (mSize / 2);}
 	Vector2f GetSize() const {return mSize;}
+
+	void SetX(float x);
 
 //Public methods
 public:

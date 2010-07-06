@@ -249,6 +249,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\PaddleTests.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\WallTests.cpp"
 					>
 				</File>

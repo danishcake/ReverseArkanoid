@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Wall>
+    <Name>Brick in the Wall</Name>
+    <Brick x="0" y="0" c="1"/>
+    <Brick x="40" y="0" c="2"/>
+    <Brick x="80" y="0" c="3"/>
+    <Brick x="120" y="0" c="1"/>
+    <Brick x="0" y="24" c="2"/>
+    <Brick x="40" y="24" c="3"/>
+    <Brick x="80" y="24" c="1"/>
+    <Brick x="120" y="24" c="2"/>
+    <Brick x="0" y="48" c="3"/>
+    <Brick x="40" y="48" c="1"/>
+    <Brick x="80" y="48" c="2"/>
+    <Brick x="120" y="48" c="3"/>
+</Wall>

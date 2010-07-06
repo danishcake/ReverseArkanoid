@@ -7,17 +7,10 @@
 
 using std::vector;
 
-ModeGame::ModeGame() :
+ModeGame::ModeGame(std::string filename) :
 	mGame(new ArkGame())
 {
-	Wall::SharedPointer wall(new Wall());
-	Brick::SharedPointer brick(new Brick(BrickType::RedBrick));
-	brick->SetPosition(Vector2f(-20, 0));
-	Brick::SharedPointer brick2(new Brick(BrickType::BlueBrick));
-	brick2->SetPosition(Vector2f(20, 0));
-	wall->AddBrick(brick);
-	wall->AddBrick(brick2);
-
+	Wall::SharedPointer wall(new Wall(filename));
 	mGame->SetWall(wall);
 }
 
@@ -64,10 +57,12 @@ ModeType::Enum ModeGame::GetType()
 
 void ModeGame::Draw(SDL_Surface* screenSurface)
 {
+	Vector2f offset((Widget::GetScreenSize().x - mGame->GetBounds().x) / 2, 0);
+
 	vector<Ball::SharedPointer> balls = mGame->GetBalls();
 	for(vector<Ball::SharedPointer>::iterator ball = balls.begin(); ball != balls.end(); ++ball)
 	{
-		Vector2i inverted_y = (*ball)->GetPosition();
+		Vector2i inverted_y = (*ball)->GetPosition() + offset;
 		inverted_y.y = 480 - (inverted_y.y + 2 * (*ball)->GetRadius());
 		StandardTextures::ball_animation->GetCurrentFrame()->Draw(inverted_y);
 	}
@@ -92,19 +87,15 @@ void ModeGame::Draw(SDL_Surface* screenSurface)
 				break;
 			}
 
-			Vector2i inverted_y = (*brick)->GetPosition() + wall->GetPosition();
+			Vector2i inverted_y = (*brick)->GetPosition() + wall->GetPosition() + offset;
 			inverted_y.y = 480 - (inverted_y.y + (*brick)->GetSize().y);
 			sprite->GetCurrentFrame()->Draw(inverted_y);
 		}
 	}
 	Paddle::SharedPointer paddle = mGame->GetPaddle();
-	Vector2i inverted_y = paddle->GetPosition();
+	Vector2i inverted_y = paddle->GetPosition() + offset;
 	inverted_y.y = 480 - (inverted_y.y + paddle->GetSize().y);
 	StandardTextures::paddle_animation->GetCurrentFrame()->Draw(inverted_y);
-
-	
-
-
 }
 
 void ModeGame::clickBack(Widget* /*widget*/)

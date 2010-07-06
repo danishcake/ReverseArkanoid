@@ -12,12 +12,16 @@ class Ball
 public:
 	typedef boost::shared_ptr<Ball> SharedPointer;
 	typedef boost::weak_ptr<Ball> WeakPointer;
+//Predicates
+	static bool IsRemovable(SharedPointer ball);
 //Constants
 public:
-	static const int INITIAL_SPEED = 80;
+	static const int INITIAL_SPEED = 120;
 	static const int DEFAULT_BOUNDS_W = 400;
 	static const int DEFAULT_BOUNDS_H = 480;
 	static const int INITIAL_RADIUS = 16;
+	static const int BOUNCE_ACCELERATION = 25;
+	static const int MAXIMUM_SPEED = 400;
 
 //Constructors
 public:

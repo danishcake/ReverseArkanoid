@@ -1,5 +1,7 @@
 #pragma once
 #include "IMode.h"
+#include <Wall.h>
+#include <vector>
 
 class Widget;
 
@@ -14,11 +16,21 @@ class ModeMenu :
 private:
 	bool mExitClicked;
 	Widget* mFeedbackWidget;
+	Wall::SharedPointer mWall;
+	std::vector<std::string> mLevels;
+	int mLevelIndex;
+
 //Private methods
 private:
 	void clickExit(Widget* /*widget*/);
 	void clickNewGame(Widget* /*widget*/);
 	void clickBetaTag(Widget* /*widget*/);
+
+	void clickNextLevel(Widget* /*widget*/);
+	void clickPrevLevel(Widget* /*widget*/);
+
+	void findLevels();
+	void loadLevel();
 public:
 	ModeMenu();
 

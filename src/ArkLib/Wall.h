@@ -26,6 +26,8 @@ public:
 private:
 	float mLeftEdge;
 	float mRightEdge;
+	float mTopEdge;
+	float mBottomEdge;
 	Vector2f mPosition;
 	Vector2f mBounds;
 	std::vector<Brick::SharedPointer> mBricks;
@@ -38,8 +40,11 @@ public:
 	Vector2f GetPosition() const {return mPosition;}
 	float GetLeftEdge() const {return mLeftEdge;}
 	float GetRightEdge() const {return mRightEdge;}
+	float GetTopEdge() const {return mTopEdge;}
+	float GetBottomEdge() const {return mBottomEdge;}
 
 	void SetX(float x);
+	void SetY(float y){mPosition.y = y;}
 
 	Vector2f GetBounds() const {return mBounds;}
 	void SetBounds(Vector2f bounds){mBounds = bounds;}
@@ -47,5 +52,8 @@ public:
 //Private methods
 private:
 	void RecalculateBounds();
+//Public methods
+public:
+	void Tick();
 };
 

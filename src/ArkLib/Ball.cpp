@@ -1,5 +1,10 @@
 #include "Ball.h"
 
+bool Ball::IsRemovable(SharedPointer ball)
+{
+	return ball->GetPosition().y - ball->GetRadius() <= 0;
+}
+
 Ball::Ball(void) :
 	mBounds((float)DEFAULT_BOUNDS_W, (float)DEFAULT_BOUNDS_H),
 	mRadius((float)INITIAL_RADIUS),
@@ -46,4 +51,12 @@ void Ball::Bounce(Vector2f normal)
 	Vector2f normal_component = normal * mVelocity.dotProduct(normal);
 
 	mVelocity -= normal_component * 2;
+
+	//Now constrain angles - two cones of 30 degrees left/right should be invalid
+	float dot = mVelocity.dotProduct(Vector2f(1, 0));
+	if(dot > cos(DEG2RAD(30)) || dot < -cos(DEG2RAD(30)))
+	{
+		
+	}
+
 }

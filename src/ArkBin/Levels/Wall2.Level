@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Wall>
+    <Name>Diamond core</Name>
+    <Brick x="0" y="0" c="3"/>
+    <Brick x="-44" y="0" c="2"/>
+	<Brick x="44" y="0" c="2"/>
+	<Brick x="0" y="24" c="2"/>
+	<Brick x="0" y="-24" c="2"/>
+	
+	<Brick x="-88" y="0" c="1"/>
+	<Brick x="88" y="0" c="1"/>
+	<Brick x="0" y="48" c="1"/>
+	<Brick x="0" y="-48" c="1"/>
+	<Brick x="-44" y="24" c="1"/>
+	<Brick x="-44" y="-24" c="1"/>
+	<Brick x="44" y="24" c="1"/>
+	<Brick x="44" y="-24" c="1"/>
+
+</Wall>

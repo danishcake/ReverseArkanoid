@@ -421,6 +421,18 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="Walls"
+				>
+				<File
+					RelativePath=".\Levels\Wall1.Level"
+					>
+				</File>
+				<File
+					RelativePath=".\Levels\Wall2.Level"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="DLLs"

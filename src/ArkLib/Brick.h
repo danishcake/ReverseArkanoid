@@ -22,6 +22,8 @@ class Brick
 public:
 	typedef boost::shared_ptr<Brick> SharedPointer;
 	typedef boost::weak_ptr<Brick> WeakPointer;
+//Predicates
+	static bool IsRemovable(SharedPointer brick);
 //Constants
 public:
 	static const int BRICK_WIDTH = 40;

@@ -84,10 +84,10 @@ TEST(BallBouncesOnPaddle)
 	{
 		game->Tick(0.016666f);
 	} //Advance until bounce expected
-	CHECK_CLOSE(100, ball->GetVelocity().y, 5);
+	CHECK_CLOSE(100, ball->GetVelocity().y, Ball::BOUNCE_ACCELERATION + 5);
 }
 
-TEST(BlocksDestroyedByBall)
+TEST(BallBouncesOnBricks)
 {
 	ArkGame::SharedPointer game(new ArkGame());
 	
@@ -120,8 +120,9 @@ TEST(BallDoesntDestroyBlocksTooFast)
 	Wall::SharedPointer wall(new Wall());
 	Brick::SharedPointer brick(new Brick(BrickType::YellowBrick));
 	wall->AddBrick(brick);
-	wall->SetX(100 - Brick::BRICK_WIDTH/2);
+	
 	game->SetWall(wall);
+	wall->SetX(100 - Brick::BRICK_WIDTH/2);
 
 	CHECK_EQUAL(3, brick->GetLives());
 
@@ -136,7 +137,50 @@ TEST(BallDoesntDestroyBlocksTooFast)
 	//Overlaps by 0.1, so will take 0.1s to move away, so check that lives don't decrement again on small step
 	game->Tick(0.02f);
 	CHECK_EQUAL(2, brick->GetLives());
+}
 
+TEST(DestroyedBrickRemoved)
+{
+	ArkGame::SharedPointer game(new ArkGame());
+	
+	Wall::SharedPointer wall(new Wall());
+	Brick::SharedPointer brick(new Brick(BrickType::BlueBrick));
+	wall->AddBrick(brick);
+	
+	game->SetWall(wall);
+	wall->SetX(100 - Brick::BRICK_WIDTH/2);
+
+	game->Tick(((float)ArkGame::STARTING_TIME) / 1000.0f);
+
+	Ball::SharedPointer ball = game->GetBalls()[0];
+	ball->SetPosition(Vector2f(100, wall->GetPosition().y - ball->GetRadius() - 1));
+	ball->SetVelocity(Vector2f(0, 1));
+
+	CHECK_EQUAL(1, brick->GetLives());
+	CHECK_EQUAL(1, wall->GetBricks().size());
+	game->Tick(1.1f);
+	CHECK_EQUAL(0, wall->GetBricks().size());
+	CHECK_EQUAL(0, brick->GetLives()); //Brick will still be valid as smart pointer hold reference
+}
+
+TEST(AccelerationOnPaddleBounce)
+{
+	ArkGame::SharedPointer game(new ArkGame());
+	game->Tick(((float)ArkGame::STARTING_TIME) / 1000.0f);
+	Ball::SharedPointer ball = game->GetBalls()[0];
+	ball->SetVelocity(Vector2f(0, -100));
+
+	float distance = 100 - ball->GetRadius() - Paddle::FIXED_Y;
+	int steps = (distance / -ball-> GetVelocity().y) / 0.016666f;
+	for(int i = 0; i < steps; i++)
+	{
+		game->Tick(0.016666f);
+	} //Advance until bounce expected
+	CHECK_CLOSE(100 + Ball::BOUNCE_ACCELERATION, ball->GetVelocity().y, 5);
+}
+
+TEST(AdditionalBalls)
+{
 }
 
 TEST(Scoring)

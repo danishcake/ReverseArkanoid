@@ -9,7 +9,9 @@ Wall::Wall(void) :
 	mPosition((float)INITIAL_X, (float)FIXED_Y),
 	mLeftEdge(0),
 	mRightEdge(0),
-	mBounds((float)DEFAULT_BOUNDS_W, (float)DEFAULT_BOUNDS_H)
+	mBounds((float)DEFAULT_BOUNDS_W, (float)DEFAULT_BOUNDS_H),
+	mTopEdge(0),
+	mBottomEdge(0)
 {
 }
 
@@ -81,20 +83,30 @@ void Wall::RecalculateBounds()
 	{
 		mLeftEdge = FLT_MAX;
 		mRightEdge = -FLT_MAX;
+		mTopEdge = -FLT_MAX;
+		mBottomEdge = FLT_MAX;
 	} else
 	{
 		mLeftEdge = 0;
 		mRightEdge = 0;
+		mTopEdge = 0;
+		mBottomEdge = 0;
 	}
 	for(vector<Brick::SharedPointer>::iterator it = mBricks.begin(); it != mBricks.end(); ++it)
 	{
 		float left = (*it)->GetPosition().x;
 		float right = (*it)->GetPosition().x + (*it)->GetSize().x;
+		float bottom = (*it)->GetPosition().y;
+		float top = (*it)->GetPosition().y + (*it)->GetSize().y;
 
 		if(left < mLeftEdge)
 			mLeftEdge = left;
 		if(right > mRightEdge)
 			mRightEdge = right;
+		if(top > mTopEdge)
+			mTopEdge = top;
+		if(bottom < mBottomEdge)
+			mBottomEdge = bottom;
 	}
 }
 
@@ -106,4 +118,9 @@ void Wall::SetX(float x)
 		mPosition.x = mLeftEdge;
 	else
 		mPosition.x = x;
+}
+
+void Wall::Tick()
+{
+	mBricks.erase(std::remove_if(mBricks.begin(), mBricks.end(), Brick::IsRemovable), mBricks.end());;
 }
