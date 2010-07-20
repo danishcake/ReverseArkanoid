@@ -16,6 +16,7 @@ public:
 	static const int FIXED_Y = 440;
 	static const int DEFAULT_BOUNDS_W = 400;
 	static const int DEFAULT_BOUNDS_H = 480;
+	static const int DEFAULT_BORDER = 32;
 //Constructors
 public:
 	Wall(void);
@@ -30,6 +31,7 @@ private:
 	float mBottomEdge;
 	Vector2f mPosition;
 	Vector2f mBounds;
+	float mBorder;
 	std::vector<Brick::SharedPointer> mBricks;
 
 //Public getters/setters

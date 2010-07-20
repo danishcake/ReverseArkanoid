@@ -11,7 +11,8 @@ Wall::Wall(void) :
 	mRightEdge(0),
 	mBounds((float)DEFAULT_BOUNDS_W, (float)DEFAULT_BOUNDS_H),
 	mTopEdge(0),
-	mBottomEdge(0)
+	mBottomEdge(0),
+	mBorder((float)DEFAULT_BORDER)
 {
 }
 
@@ -19,7 +20,8 @@ Wall::Wall(std::string filename) :
 	mPosition((float)INITIAL_X, (float)FIXED_Y),
 	mLeftEdge(0),
 	mRightEdge(0),
-	mBounds((float)DEFAULT_BOUNDS_W, (float)DEFAULT_BOUNDS_H)
+	mBounds((float)DEFAULT_BOUNDS_W, (float)DEFAULT_BOUNDS_H),
+	mBorder((float)DEFAULT_BORDER)
 {
 	TiXmlDocument doc("Levels\\" + filename);
 	if(doc.LoadFile())
@@ -112,10 +114,10 @@ void Wall::RecalculateBounds()
 
 void Wall::SetX(float x)
 {
-	if(x > mBounds.x - mRightEdge)
-		mPosition.x = mBounds.x - mRightEdge;
-	else if(x < -mLeftEdge)
-		mPosition.x = -mLeftEdge;
+	if(x > mBounds.x - mRightEdge - mBorder)
+		mPosition.x = mBounds.x - mRightEdge - mBorder;
+	else if(x < -mLeftEdge + mBorder)
+		mPosition.x = -mLeftEdge + mBorder;
 	else
 		mPosition.x = x;
 }
