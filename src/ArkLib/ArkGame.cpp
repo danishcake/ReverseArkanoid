@@ -35,31 +35,15 @@ void ArkGame::TickRunning(float timespan)
 			for(vector<Brick::SharedPointer>::iterator brick = bricks.begin(); brick != bricks.end(); ++brick)
 			{
 				brick_bounds[0] = (*brick)->GetPosition() + mWall->GetPosition();
-				brick_bounds[1] = (*brick)->GetPosition() + Vector2f((*brick)->GetSize().x, 0) + mWall->GetPosition();
-				brick_bounds[2] = (*brick)->GetPosition() + (*brick)->GetSize() + mWall->GetPosition();
-				brick_bounds[3] = (*brick)->GetPosition() + Vector2f(0, (*brick)->GetSize().y) + mWall->GetPosition();
-				brick_bounds[4] = (*brick)->GetPosition() + mWall->GetPosition();
+				brick_bounds[1] = (*brick)->GetPosition() + mWall->GetPosition() + Vector2f((*brick)->GetSize().x, 0);
+				brick_bounds[2] = (*brick)->GetPosition() + mWall->GetPosition() + (*brick)->GetSize();
+				brick_bounds[3] = (*brick)->GetPosition() + mWall->GetPosition() + Vector2f(0, (*brick)->GetSize().y);
 
 				Vector2f collision_point;
-				int collision_index;
-				if(Collisions2f::CircleIntersectsConvex((*ball)->GetCentre(), (*ball)->GetRadius(), brick_bounds, 5, collision_point, collision_index))
+				float collision_distance = Collisions2f::PolygonPointDistance(brick_bounds, 4, (*ball)->GetCentre(), collision_point);
+				if(collision_distance < (*ball)->GetRadius())
 				{
-					Vector2f outward_vector;
-					//Vector2f outward_vector = (*ball)->GetCentre() - collision_point;
-					//outward_vector.normalize();//
-					switch(collision_index)
-					{
-					case 0:
-					case 3:
-					default:
-						outward_vector = Vector2f(0, 1);
-						break;
-					case 1:
-					case 2:
-						outward_vector = Vector2f(1, 0);
-						break;
-					}
-
+					Vector2f outward_vector = (*ball)->GetCentre() - collision_point;
 					if(!(*ball)->GetOverlapping())
 					{
 						(*ball)->Bounce(outward_vector);

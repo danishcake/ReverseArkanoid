@@ -531,7 +531,7 @@ public:
       return false;
    }
    
-         /**
+   /**
      * Determines if two polygon meshes specified as a list of triangles overlap. Returns on first encountered point
      * @param mesh_a The fist triangle list
      * @param mesh_b The second triangle list
@@ -560,7 +560,109 @@ public:
 
       return false;
    }
-   
+
+    /**
+     * Finds the minimum range between a point and a line segment
+     * @param mesh Convex hull to test
+     * @param vertex_count The number of points in the hull
+     * @param point The point to test
+     * @param out The point on the hull of closest approach
+     */
+   static T PointLineSegmentDistance(const Vector2<T> p1, const Vector2<T> p2, const Vector2<T> q, Vector2<T>& out)
+   {
+      Vector2<T> p1_to_q = q - p1;
+      Vector2<T> dir = (p2 - p1);
+      T length_along = dir.length();
+      dir /= length_along; //Normalise dir
+      float intersect_along = dir.dotProduct(p1_to_q);
+      if(intersect_along < 0)
+      {
+         out = p1;
+         return (p1 - q).length();
+      }
+      if(intersect_along > length_along)
+      {
+         out = p2;
+         return (p2 - q).length();
+      }
+      out = p1 + dir * intersect_along;
+      return (q - out).length();
+   }
+
+    /**
+     * Finds the minimum range between a point and a line segment
+     * @param mesh Convex hull to test
+     * @param vertex_count The number of points in the hull
+     * @param point The point to test
+     * @param out The point on the hull of closest approach
+     */
+   static T PointLineSegmentDistance(const Vector3<T> p1, const Vector3<T> p2, const Vector3<T> q, Vector3<T>& out)
+   {
+      Vector3<T> p1_to_q = q - p1;
+      Vector3<T> dir = (p2 - p1);
+      T length_along = dir.length();
+      dir /= length_along; //Normalise dir
+      float intersect_along = dir.dotProduct(p1_to_q);
+      if(intersect_along < 0)
+      {
+         out = p1;
+         return (p1 - q).length();
+      }
+      if(intersect_along > length_along)
+      {
+         out = p2;
+         return (p2 - q).length();
+      }
+      out = p1 + dir * intersect_along;
+      return (q - out).length();
+   }
+
+   /**
+     * Finds the range between a point and a convex hull
+     * @param mesh Convex hull to test (no repeated elements, automatically closed)
+     * @param vertex_count The number of points in the hull
+     * @param point The point to test
+     * @param out The point on the hull of closest approach
+     */
+   static T PolygonPointDistance(const Vector2<T>* const outline, const int vertex_count, const Vector2<T> point, Vector2<T>& out)
+   {
+      T min_d = PointLineSegmentDistance(outline[0], outline[1], point, out);
+      for(int i = 1; i < vertex_count; i++)
+      {
+         Vector2<T> line_closest;
+         T d = PointLineSegmentDistance(outline[i], outline[(i + 1) % vertex_count], point, line_closest);
+         if(d < min_d)
+         {
+            min_d = d;
+            out = line_closest;
+         }
+      }
+      return min_d;
+   }
+
+   /**
+     * Finds the range between a point and a convex hull
+     * @param mesh Convex hull to test (no repeated elements, automatically closed)
+     * @param vertex_count The number of points in the hull
+     * @param point The point to test
+     * @param out The point on the hull of closest approach
+     */
+   static T PolygonPointDistance(const Vector3<T>* const outline, const int vertex_count, const Vector3<T> point, Vector3<T>& out)
+   {
+      T min_d = PointLineSegmentDistance(outline[0], outline[1], point, out);
+      for(int i = 1; i < vertex_count + 1; i++)
+      {
+         Vector3<T> line_closest;
+         T d = PointLineSegmentDistance(outline[i], outline[(i + 1) % vertex_count], point, line_closest);
+         if(d < min_d)
+         {
+            min_d = d;
+            out = line_closest;
+         }
+      }
+      return min_d;
+   }
+
 private:
 	/**
 	* Gets twice the area of a triangle using the determinant method.
