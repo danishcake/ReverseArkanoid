@@ -1,8 +1,8 @@
 <AnimationSet>
   <Animation Name="Brick">
-    <Frame Width="40" Height="20" Top="0" Left="0" File="BlueBrick.png" Time="0.5"/>
-  </Animation>
-  <Animation Name="BrickDamaged">
-    <Frame Width="40" Height="20" Top="0" Left="0" File="BlueBrickDamaged.png" Time="0.5"/>
+    <Frame OffsetX="20" OffsetY="10" Width="40" Height="20" Top="0" Left="0" File="BlueBrick.png" Time="0.5"/>
+</Animation>
+<Animation Name="BrickDamaged">
+	<Frame OffsetX="20" OffsetY="10" Width="40" Height="20" Top="0" Left="0" File="BlueBrickDamaged.png" Time="0.5"/>
   </Animation>
 </AnimationSet>

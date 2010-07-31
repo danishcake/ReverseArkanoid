@@ -9,6 +9,7 @@ namespace StandardTextures
 	extern Animation* blue_brick_animation[2];
 	extern Animation* yellow_brick_animation[3];
 	extern Animation* paddle_animation;
+	extern Animation* background_animation;
 
 
 	//Load textures

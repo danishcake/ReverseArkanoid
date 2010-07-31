@@ -58,7 +58,7 @@ ModeType::Enum ModeGame::GetType()
 
 void ModeGame::Draw(SDL_Surface* screenSurface)
 {
-	Vector2f offset((Widget::GetScreenSize().x - mGame->GetBounds().x) / 2, 0);
+	StandardTextures::background_animation->GetFrameByIndex(0)->Draw(Vector2f(0, 0));
 
 	vector<Ball::SharedPointer> balls = mGame->GetBalls();
 	for(vector<Ball::SharedPointer>::iterator ball = balls.begin(); ball != balls.end(); ++ball)
@@ -67,13 +67,13 @@ void ModeGame::Draw(SDL_Surface* screenSurface)
 		int frame = 0;
 		for(std::deque<Vector2f>::const_iterator it = trail.begin(); it != trail.end(); ++it)
 		{
-			Vector2i trail_inverted_y = *it + offset;
-			trail_inverted_y .y = 480 - (trail_inverted_y.y + 2 * (*ball)->GetRadius());
-			StandardTextures::ball_trail_animation->GetFrameByIndex(frame++)->Draw(trail_inverted_y);
+//			Vector2i trail_inverted_y = *it + offset;
+//			trail_inverted_y .y = 480 - trail_inverted_y.y;
+//			StandardTextures::ball_trail_animation->GetFrameByIndex(frame++)->Draw(trail_inverted_y);
 		}
 
-		Vector2i inverted_y = (*ball)->GetPosition() + offset;
-		inverted_y.y = 480 - (inverted_y.y + 2 * (*ball)->GetRadius());
+		Vector2i inverted_y = ArkGame::BallToGame(*ball);
+		inverted_y.y = 480 - inverted_y.y;
 		StandardTextures::ball_animation->GetCurrentFrame()->Draw(inverted_y);
 	}
 	if(mGame->GetWall().get())
@@ -96,16 +96,15 @@ void ModeGame::Draw(SDL_Surface* screenSurface)
 				sprite = StandardTextures::yellow_brick_animation[(*brick)->GetLives() - 1];
 				break;
 			}
-			//TODO add damaged
 
-			Vector2i inverted_y = (*brick)->GetPosition() + wall->GetPosition() + offset;
-			inverted_y.y = 480 - (inverted_y.y + (*brick)->GetSize().y);
+			Vector2i inverted_y = ArkGame::BrickToGame(*brick, wall);
+			inverted_y.y = 480 - inverted_y.y;
 			sprite->GetCurrentFrame()->Draw(inverted_y);
 		}
 	}
 	Paddle::SharedPointer paddle = mGame->GetPaddle();
-	Vector2i inverted_y = paddle->GetPosition() + offset;
-	inverted_y.y = 480 - (inverted_y.y + paddle->GetSize().y);
+	Vector2i inverted_y = ArkGame::PaddleToGame(paddle);
+	inverted_y.y = 480 - inverted_y.y;
 	StandardTextures::paddle_animation->GetCurrentFrame()->Draw(inverted_y);
 }
 

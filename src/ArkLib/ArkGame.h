@@ -26,7 +26,7 @@ public:
 	typedef boost::weak_ptr<ArkGame> WeakPointer;
 //Constants
 public:
-	static const int DEFAULT_BOUNDS_W = 400;
+	static const int DEFAULT_BOUNDS_W = 528;
 	static const int DEFAULT_BOUNDS_H = 480;
 	static const int STARTING_TIME = 2000; //ms
 	static const int BOUNCE_POINTS = 10;
@@ -65,6 +65,12 @@ public:
 //Public methods
 public:
 	void Tick(float timespan);
+	//Gets the balls center in game space 
+	static Vector2f BallToGame(Ball::SharedPointer ball);
+	//Gets the bricks center in game space
+	static Vector2f BrickToGame(Brick::SharedPointer brick, Wall::SharedPointer wall);
+	//Gets the paddles center in game space
+	static Vector2f PaddleToGame(Paddle::SharedPointer paddle);
 //Private methods
 private:
 	void TickRunning(float timespan);

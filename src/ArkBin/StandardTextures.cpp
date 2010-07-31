@@ -16,6 +16,7 @@ namespace StandardTextures
 	Animation* yellow_brick_animation[3] = {0, 0, 0};
 	Animation* paddle_animation = 0;
 	Animation* ball_trail_animation = 0;
+	Animation* background_animation = 0;
 
 	void LoadTextures()
 	{
@@ -95,6 +96,17 @@ namespace StandardTextures
 		} else
 		{
 			Logger::ErrorOut() << "Unable to load paddle animations\n";
+		}
+
+		AnimationSet* background_animation_set = SDLTextureManager::GetAnimationSet("Background.animation");
+		if(background_animation_set)
+		{
+			background_animation = background_animation_set->GetAnimation("Background");
+			if(!background_animation)
+				Logger::ErrorOut() << "Unable to load background animation\n";
+		} else
+		{
+			Logger::ErrorOut() << "Unable to load background animations\n";
 		}
 	}
 

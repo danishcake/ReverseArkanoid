@@ -4,6 +4,7 @@
 #include "vmath.h"
 #include <vector>
 #include "Brick.h"
+#include "Ball.h"
 
 class Wall
 {
@@ -33,11 +34,14 @@ private:
 	Vector2f mBounds;
 	float mBorder;
 	std::vector<Brick::SharedPointer> mBricks;
+	std::vector<Ball::WeakPointer> mOverlappingBalls;
 
 //Public getters/setters
 public:
 	std::vector<Brick::SharedPointer> GetBricks() const {return mBricks;}
 	void AddBrick(Brick::SharedPointer brick);
+
+	//void AddOverlappingBall(
 
 	Vector2f GetPosition() const {return mPosition;}
 	float GetLeftEdge() const {return mLeftEdge;}

@@ -1,11 +1,11 @@
 <AnimationSet>
   <Animation Name="Brick">
-    <Frame Width="40" Height="20" Top="0" Left="0" File="YellowBrick.png" Time="0.5"/>
+    <Frame OffsetX="20" OffsetY="10" Width="40" Height="20" Top="0" Left="0" File="YellowBrick.png" Time="0.5"/>
   </Animation>
   <Animation Name="BrickDamaged">
-    <Frame Width="40" Height="20" Top="0" Left="0" File="YellowBrickDamaged.png" Time="0.5"/>
+    <Frame OffsetX="20" OffsetY="10" Width="40" Height="20" Top="0" Left="0" File="YellowBrickDamaged.png" Time="0.5"/>
   </Animation>
 	<Animation Name="BrickDamaged2">
-		<Frame Width="40" Height="20" Top="0" Left="0" File="YellowBrickDamaged2.png" Time="0.5"/>
+		<Frame OffsetX="20" OffsetY="10" Width="40" Height="20" Top="0" Left="0" File="YellowBrickDamaged2.png" Time="0.5"/>
 	</Animation>	
 </AnimationSet>

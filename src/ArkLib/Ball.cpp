@@ -9,6 +9,7 @@ Ball::Ball(void) :
 	mBounds((float)DEFAULT_BOUNDS_W, (float)DEFAULT_BOUNDS_H),
 	mRadius((float)INITIAL_RADIUS),
 	mOverlapping(false),
+	mOverlappingPaddle(false),
 	mTrailTime(0),
 	mTrailOffset(0, 0)
 {

@@ -29,21 +29,21 @@ void ArkGame::TickRunning(float timespan)
 		bool ball_hit = false;
 		if(mWall.get())
 		{
-			Vector2f brick_bounds[5]; //Bounding hull of brick
+			Vector2f brick_bounds[4]; //Bounding hull of brick
 
 			vector<Brick::SharedPointer> bricks = mWall->GetBricks();
 			for(vector<Brick::SharedPointer>::iterator brick = bricks.begin(); brick != bricks.end(); ++brick)
 			{
-				brick_bounds[0] = (*brick)->GetPosition() + mWall->GetPosition();
-				brick_bounds[1] = (*brick)->GetPosition() + mWall->GetPosition() + Vector2f((*brick)->GetSize().x, 0);
-				brick_bounds[2] = (*brick)->GetPosition() + mWall->GetPosition() + (*brick)->GetSize();
-				brick_bounds[3] = (*brick)->GetPosition() + mWall->GetPosition() + Vector2f(0, (*brick)->GetSize().y);
+				brick_bounds[0] = BrickToGame(*brick, mWall) + Vector2f(-(*brick)->GetSize().x,  (*brick)->GetSize().y) / 2.0f;
+				brick_bounds[1] = BrickToGame(*brick, mWall) + Vector2f( (*brick)->GetSize().x,  (*brick)->GetSize().y) / 2.0f;
+				brick_bounds[2] = BrickToGame(*brick, mWall) + Vector2f( (*brick)->GetSize().x, -(*brick)->GetSize().y) / 2.0f;
+				brick_bounds[3] = BrickToGame(*brick, mWall) + Vector2f(-(*brick)->GetSize().x, -(*brick)->GetSize().y) / 2.0f;
 
 				Vector2f collision_point;
-				float collision_distance = Collisions2f::PolygonPointDistance(brick_bounds, 4, (*ball)->GetCentre(), collision_point);
+				float collision_distance = Collisions2f::PolygonPointDistance(brick_bounds, 4, BallToGame(*ball), collision_point);
 				if(collision_distance < (*ball)->GetRadius())
 				{
-					Vector2f outward_vector = (*ball)->GetCentre() - collision_point;
+					Vector2f outward_vector = BallToGame(*ball) - collision_point;
 					if(!(*ball)->GetOverlapping())
 					{
 						(*ball)->Bounce(outward_vector);
@@ -61,49 +61,57 @@ void ArkGame::TickRunning(float timespan)
 
 
 		//Collide with the paddle
-		Vector2f paddle_bottom_left = mPaddle->GetPosition();
-		Vector2f paddle_top_left = mPaddle->GetPosition() + Vector2f(0, mPaddle->GetSize().y);
-		Vector2f paddle_top_right = mPaddle->GetPosition() + mPaddle->GetSize();
-		Vector2f collision_point;
+		Vector2f paddle_bounds[4]; //Bounding hull of paddle
 
-		if((*ball)->GetVelocity().y <= 0 && Collisions2f::LineInCircle(paddle_top_left, paddle_top_right, 
-									  (*ball)->GetCentre(), (*ball)->GetRadius(),
-									  collision_point))
+		paddle_bounds[0] = PaddleToGame(mPaddle) + Vector2f(-mPaddle->GetSize().x,  mPaddle->GetSize().y) / 2.0f;
+		paddle_bounds[1] = PaddleToGame(mPaddle) + Vector2f( mPaddle->GetSize().x,  mPaddle->GetSize().y) / 2.0f;
+		paddle_bounds[2] = PaddleToGame(mPaddle) + Vector2f( mPaddle->GetSize().x, -mPaddle->GetSize().y) / 2.0f;
+		paddle_bounds[3] = PaddleToGame(mPaddle) + Vector2f(-mPaddle->GetSize().x, -mPaddle->GetSize().y) / 2.0f;
+
+		Vector2f paddle_collision_point;
+		float paddle_collision_distance = Collisions2f::PolygonPointDistance(paddle_bounds, 4, BallToGame(*ball), paddle_collision_point);
+		if(paddle_collision_distance < (*ball)->GetRadius())
 		{
-			const Vector2f down_bias(0, -100); //Increasing this makes bounces more vertically biased
-			Vector2f outward_vector = (*ball)->GetCentre() - (mPaddle->GetCentre() + down_bias);
-			outward_vector.normalize();
-			(*ball)->Bounce(outward_vector);
-			//Apply acceleration
-
-			Vector2f direction = (*ball)->GetVelocity();
-			float magnitude = direction.length();
-			direction.normalize();
-			magnitude += Ball::BOUNCE_ACCELERATION;
-			if(magnitude > Ball::MAXIMUM_SPEED)
+			if(!(*ball)->GetOverlappingPaddle())
 			{
-				Vector2f split_direction;
-				magnitude = Ball::INITIAL_SPEED;
-				if(direction.x < 0)
-					direction.x -= 0.2f;
-				else
-					direction.x += 0.2f;
+				const Vector2f down_bias(0, -300); //Increasing this makes bounces more vertically biased
+				//(*ball)->Bounce(BallToGame(*ball) - paddle_collision_point + down_bias);
+				(*ball)->Bounce(PaddleToGame(mPaddle) - paddle_collision_point + down_bias);
+				(*ball)->SetOverlappingPaddle(true);
 
+				Vector2f direction = (*ball)->GetVelocity();
+				float magnitude = direction.length();
 				direction.normalize();
-				split_direction = direction;
-				split_direction.x *= -1;
+				magnitude += Ball::BOUNCE_ACCELERATION;
+				if(magnitude > Ball::MAXIMUM_SPEED)
+				{
+					Vector2f split_direction;
+					magnitude = Ball::INITIAL_SPEED;
+					if(direction.x < 0)
+						direction.x -= 0.2f;
+					else
+						direction.x += 0.2f;
+
+					direction.normalize();
+					split_direction = direction;
+					split_direction.x *= -1;
 
 
-				Ball::SharedPointer split_ball(new Ball());
-				split_ball->SetPosition((*ball)->GetPosition());
-				split_ball->SetVelocity(split_direction * (magnitude + 2 * Ball::BOUNCE_ACCELERATION));
-				spawned_balls.push_back(split_ball);
+					Ball::SharedPointer split_ball(new Ball());
+					split_ball->SetPosition((*ball)->GetPosition());
+					split_ball->SetVelocity(split_direction * (magnitude + 2 * Ball::BOUNCE_ACCELERATION));
+					split_ball->SetOverlappingPaddle(true);
+					spawned_balls.push_back(split_ball);
+				}
+				(*ball)->SetVelocity(direction * magnitude);
+
+				//Scoring
+				if(mWall.get())
+					mScore += static_cast<int>(mWall->GetBricks().size()) * BOUNCE_POINTS;
 			}
-			(*ball)->SetVelocity(direction * magnitude);
-
-			//Scoring
-			if(mWall.get())
-				mScore += static_cast<int>(mWall->GetBricks().size()) * BOUNCE_POINTS;
+		} else
+		{
+			(*ball)->SetOverlappingPaddle(false);
 		}
 	}
 	for(vector<Ball::SharedPointer>::iterator it = spawned_balls.begin(); it != spawned_balls.end(); ++it)
@@ -170,4 +178,20 @@ void ArkGame::AddBall(Ball::SharedPointer ball)
 {
 	mBalls.push_back(ball);
 	ball->SetBounds(mBounds);
+}
+
+Vector2f ArkGame::BallToGame(Ball::SharedPointer ball)
+{
+	return ball->GetPosition() + Vector2f((640 - ball->GetBounds().x) / 2, 0);
+}
+
+Vector2f ArkGame::BrickToGame(Brick::SharedPointer brick, Wall::SharedPointer wall)
+{
+	return brick->GetPosition() + wall->GetPosition() + (brick->GetSize() / 2) +
+		   Vector2f((640 - wall->GetBounds().x) / 2, 0);
+}
+
+Vector2f ArkGame::PaddleToGame(Paddle::SharedPointer paddle)
+{
+	return paddle->GetPosition() + Vector2f((640 - paddle->GetBounds().x) / 2.0, 0) + Vector2f(paddle->GetSize().x / 2, -paddle->GetSize().y / 2);
 }

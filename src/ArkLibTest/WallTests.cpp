@@ -24,12 +24,12 @@ TEST(AddBricks)
 
 	//Collection can only move within limits of bounds
 
-	collection->SetX(0);
-	CHECK_EQUAL(0, collection->GetPosition().x);
+	collection->SetX(64);
+	CHECK_EQUAL(64, collection->GetPosition().x);
 	collection->SetX(-10);
-	CHECK_EQUAL(0, collection->GetPosition().x);
+	CHECK_EQUAL(Ball::INITIAL_RADIUS*2, collection->GetPosition().x);
 	collection->SetX(collection->GetBounds().x + 500);
-	CHECK_EQUAL(collection->GetBounds().x - Brick::BRICK_WIDTH, collection->GetPosition().x);
+	CHECK_EQUAL(collection->GetBounds().x - Brick::BRICK_WIDTH - Ball::INITIAL_RADIUS*2, collection->GetPosition().x);
 }
 
 TEST(WallFromXML)

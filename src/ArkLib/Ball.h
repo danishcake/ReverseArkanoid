@@ -37,13 +37,14 @@ private:
 	Vector2f mBounds;
 	float mRadius;
 	bool mOverlapping;
+	bool mOverlappingPaddle;
 	std::deque<Vector2f> mTrail;
 	float mTrailTime;
 	Vector2f mTrailOffset;
 //Public getters/setters
 public:
+	//Gets/sets the centre of the ball
 	Vector2f GetPosition() const {return mPosition;}
-	Vector2f GetCentre() const {return mPosition + Vector2f(mRadius, mRadius);}
 	void SetPosition(Vector2f position){mPosition = position;}
 
 	Vector2f GetVelocity() const {return mVelocity;}
@@ -57,7 +58,9 @@ public:
 
 	bool GetOverlapping() const {return mOverlapping;}
 	void SetOverlapping(bool overlapping){mOverlapping = overlapping;}
-	
+
+	bool GetOverlappingPaddle() const {return mOverlappingPaddle;}
+	void SetOverlappingPaddle(bool overlapping) {mOverlappingPaddle = overlapping;}
 
 	const std::deque<Vector2f> GetTrail() const {return mTrail;}
 

@@ -1,5 +1,6 @@
 #include "Paddle.h"
 #include <cfloat>
+#include "ArkGame.h"
 
 using std::vector;
 
@@ -25,7 +26,8 @@ void Paddle::Tick(float timespan, std::vector<Ball::SharedPointer> balls, Wall::
 		
 		for(vector<Ball::SharedPointer>::iterator it = balls.begin(); it != balls.end(); ++it)
 		{
-			float dist = (*it)->GetPosition().y;
+			Vector2f ballPosition = (*it)->GetPosition();
+			float dist = ballPosition.y;
 			if((*it)->GetVelocity().y > 0)
 				dist += (*it)->GetBounds().y;
 			float time_to_paddle = dist / fabs((*it)->GetVelocity().y);
@@ -36,7 +38,7 @@ void Paddle::Tick(float timespan, std::vector<Ball::SharedPointer> balls, Wall::
 				ball = *it;
 			}
 		}
-		target_x = ball->GetPosition().x + ball->GetRadius() - mSize.x / 2;
+		target_x = ball->GetPosition().x - mSize.x / 2;
 		target_dx = ball->GetVelocity().x;
 	} else
 	{ //Wander to the centre slowly
