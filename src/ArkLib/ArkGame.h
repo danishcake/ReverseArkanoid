@@ -67,6 +67,7 @@ public:
 	void Tick(float timespan);
 	//Gets the balls center in game space 
 	static Vector2f BallToGame(Ball::SharedPointer ball);
+	static Vector2f BallToGame(Ball* ball);
 	//Gets the bricks center in game space
 	static Vector2f BrickToGame(Brick::SharedPointer brick, Wall::SharedPointer wall);
 	//Gets the paddles center in game space

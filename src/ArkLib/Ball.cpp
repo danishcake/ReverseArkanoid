@@ -1,4 +1,5 @@
 #include "Ball.h"
+#include "ArkGame.h"
 
 bool Ball::IsRemovable(SharedPointer ball)
 {
@@ -53,7 +54,7 @@ void Ball::Tick(float timespan)
 	mTrailTime += timespan;
 	if(mTrailTime > ((float)TRAIL_SEGMENT_TIME) / 1000.0f)
 	{
-		mTrail.push_front(mPosition);
+		mTrail.push_front(ArkGame::BallToGame(this));
 		if(mTrail.size() == TRAIL_LENGTH + 1)
 			mTrail.pop_back();
 		mTrailTime = 0;

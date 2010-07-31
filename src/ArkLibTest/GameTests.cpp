@@ -78,7 +78,7 @@ TEST(BallBouncesOnPaddle)
 	ball->SetPosition(Vector2f(ball->GetPosition().x, 100));
 	ball->SetVelocity(Vector2f(0, -100));
 
-	float distance = 100 - ball->GetRadius() - Paddle::FIXED_Y;
+	float distance = 100 - ball->GetRadius();// - Paddle::FIXED_Y;
 	int steps = (distance / -ball->GetVelocity().y) / 0.016666f;
 	for(int i = 0; i < steps; i++)
 	{

@@ -67,9 +67,9 @@ void ModeGame::Draw(SDL_Surface* screenSurface)
 		int frame = 0;
 		for(std::deque<Vector2f>::const_iterator it = trail.begin(); it != trail.end(); ++it)
 		{
-//			Vector2i trail_inverted_y = *it + offset;
-//			trail_inverted_y .y = 480 - trail_inverted_y.y;
-//			StandardTextures::ball_trail_animation->GetFrameByIndex(frame++)->Draw(trail_inverted_y);
+			Vector2i trail_inverted_y = *it;
+			trail_inverted_y .y = 480 - trail_inverted_y.y;
+			StandardTextures::ball_trail_animation->GetFrameByIndex(frame++)->Draw(trail_inverted_y);
 		}
 
 		Vector2i inverted_y = ArkGame::BallToGame(*ball);

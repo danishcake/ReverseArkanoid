@@ -185,6 +185,11 @@ Vector2f ArkGame::BallToGame(Ball::SharedPointer ball)
 	return ball->GetPosition() + Vector2f((640 - ball->GetBounds().x) / 2, 0);
 }
 
+Vector2f ArkGame::BallToGame(Ball* ball)
+{
+	return ball->GetPosition() + Vector2f((640 - ball->GetBounds().x) / 2, 0);
+}
+
 Vector2f ArkGame::BrickToGame(Brick::SharedPointer brick, Wall::SharedPointer wall)
 {
 	return brick->GetPosition() + wall->GetPosition() + (brick->GetSize() / 2) +
