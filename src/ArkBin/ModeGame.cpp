@@ -121,10 +121,10 @@ void ModeGame::clickBetaTag(Widget* /*widget*/)
 
 void ModeGame::mouseMove(Widget* /*widget*/, MouseEventArgs args)
 {
-	Vector2f offset((Widget::GetScreenSize().x - mGame->GetBounds().x) / 2, 0);
 	Wall::SharedPointer wall = mGame->GetWall();
 	if(wall.get())
 	{
+		Vector2f offset((Widget::GetScreenSize().x - wall->GetBounds().x) / 2 + 2 * Brick::BRICK_WIDTH, 0);
 		wall->SetX(args.x - offset.x);
 	}
 }

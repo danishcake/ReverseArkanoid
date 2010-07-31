@@ -75,7 +75,7 @@ void ArkGame::TickRunning(float timespan)
 			if(!(*ball)->GetOverlappingPaddle())
 			{
 				const Vector2f down_bias(0, -300); //Increasing this makes bounces more vertically biased
-				//(*ball)->Bounce(BallToGame(*ball) - paddle_collision_point + down_bias);
+				
 				(*ball)->Bounce(PaddleToGame(mPaddle) - paddle_collision_point + down_bias);
 				(*ball)->SetOverlappingPaddle(true);
 
@@ -169,7 +169,7 @@ void ArkGame::SetBounds(Vector2f bounds)
 void ArkGame::SetWall(Wall::SharedPointer wall)
 {
 	mWall = wall;
-	mWall->SetBounds(mBounds);
+	mWall->SetBounds(mBounds - Vector2f(64, 0));
 	mWall->SetY(Wall::FIXED_Y - mWall->GetTopEdge());
 	mWall->SetX(mBounds.x / 2 - (mWall->GetRightEdge() + mWall->GetLeftEdge()) / 2);
 }
