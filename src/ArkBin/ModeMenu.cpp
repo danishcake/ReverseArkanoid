@@ -163,8 +163,8 @@ void ModeMenu::Draw(SDL_Surface* screenSurface)
 				break;
 			}
 
-			Vector2i inverted_y = (*brick)->GetPosition() + mWall->GetPosition() + offset;
-			inverted_y.y = 480 - (inverted_y.y + (*brick)->GetSize().y);
+			Vector2i inverted_y = (*brick)->GetPosition() + mWall->GetPosition() + offset + Vector2f(Brick::BRICK_WIDTH / 2, 0);
+			inverted_y.y = 480 - inverted_y.y;
 			sprite->GetCurrentFrame()->Draw(inverted_y);
 		}
 	}
