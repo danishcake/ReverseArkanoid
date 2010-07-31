@@ -440,6 +440,18 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="Background"
+					>
+					<File
+						RelativePath=".\Sprites\Background.animation"
+						>
+					</File>
+					<File
+						RelativePath=".\Sprites\Background.png"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Walls"
