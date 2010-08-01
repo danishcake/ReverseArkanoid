@@ -84,7 +84,15 @@ void Ball::Bounce(Vector2f normal)
 	float dot = mVelocity.dotProduct(Vector2f(1, 0));
 	if(dot > cos(DEG2RAD(30)) || dot < -cos(DEG2RAD(30)))
 	{
-		
+		float magnitude = mVelocity.length();
+		if(mVelocity.x < 0 && mVelocity.y < 0)
+			mVelocity = Vector2f(-cos(DEG2RAD(30)), -sin(DEG2RAD(30))) * magnitude;
+		else if(mVelocity.x > 0 && mVelocity.y < 0)
+			mVelocity = Vector2f(cos(DEG2RAD(30)), -sin(DEG2RAD(30))) * magnitude;
+		else if(mVelocity.x < 0 && mVelocity.y > 0)
+			mVelocity = Vector2f(-cos(DEG2RAD(30)), sin(DEG2RAD(30))) * magnitude;
+		else
+			mVelocity = Vector2f(cos(DEG2RAD(30)), sin(DEG2RAD(30))) * magnitude;
 	}
 
 }

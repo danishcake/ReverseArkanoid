@@ -17,7 +17,7 @@ void Paddle::Tick(float timespan, std::vector<Ball::SharedPointer> balls, Wall::
 {
 	float target_x;
 	float target_dx;
-	float edge_offset;
+	float edge_offset = 0;
 
 	if(wall.get())
 	{

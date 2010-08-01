@@ -137,6 +137,12 @@ void ArkGame::TickRunning(float timespan)
 		mScore += static_cast<int>(mWall->GetBricks().size()) * BOUNCE_POINTS * BALL_POINTS * (ball_count - mBalls.size());
 	}
 	mPaddle->Tick(timespan, mBalls, mWall);
+
+	if(mBalls.size() == 0)
+	{
+		mPhase == GamePhase::BallLost;
+		mScore += 500;
+	}
 }
 
 void ArkGame::Tick(float timespan)
@@ -159,6 +165,8 @@ void ArkGame::Tick(float timespan)
 		TickRunning(timespan);
 		break;
 	case GamePhase::BallLost:
+		mTimer = 0;
+		mPhase= GamePhase::Starting;
 		break;
 	case GamePhase::GameOver:
 		break;
