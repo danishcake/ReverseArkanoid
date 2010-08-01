@@ -1,0 +1,14 @@
+<AnimationSet>
+  <Animation Name="Numbers">
+    <Frame Width="40" Height="70" Top="0" Left="0" File="RedNumbers.png" Time="0.5"/>
+	<Frame Width="40" Height="70" Top="0" Left="40" File="RedNumbers.png" Time="0.5"/>
+	<Frame Width="40" Height="70" Top="0" Left="80" File="RedNumbers.png" Time="0.5"/>
+	<Frame Width="40" Height="70" Top="0" Left="120" File="RedNumbers.png" Time="0.5"/>
+	<Frame Width="40" Height="70" Top="0" Left="160" File="RedNumbers.png" Time="0.5"/>
+	<Frame Width="40" Height="70" Top="0" Left="200" File="RedNumbers.png" Time="0.5"/>
+	<Frame Width="40" Height="70" Top="0" Left="240" File="RedNumbers.png" Time="0.5"/>
+	<Frame Width="40" Height="70" Top="0" Left="280" File="RedNumbers.png" Time="0.5"/>
+	<Frame Width="40" Height="70" Top="0" Left="320" File="RedNumbers.png" Time="0.5"/>
+	<Frame Width="40" Height="70" Top="0" Left="360" File="RedNumbers.png" Time="0.5"/>
+  </Animation>
+</AnimationSet>

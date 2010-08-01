@@ -4,6 +4,7 @@
 #include <Widget.h>
 #include "FeedbackWidget.h"
 #include "StandardTextures.h"
+#include <boost/lexical_cast.hpp>
 
 using std::vector;
 
@@ -58,7 +59,16 @@ ModeType::Enum ModeGame::GetType()
 
 void ModeGame::Draw(SDL_Surface* screenSurface)
 {
+	//Draw background and score
 	StandardTextures::background_animation->GetFrameByIndex(0)->Draw(Vector2f(0, 0));
+	std::string score_string = boost::lexical_cast<std::string, int>(mGame->GetScore());
+	Vector2f score_origin(320 - ((float)score_string.size()) * 40.0f / 2, 350);
+	for(int i = 0; i < score_string.size(); i++)
+	{
+		int val = boost::lexical_cast<int, char>(score_string.at(i));
+		StandardTextures::red_numbers_animation->GetFrameByIndex(val)->Draw(score_origin + Vector2f(i * 40, 0));
+	}
+
 
 	vector<Ball::SharedPointer> balls = mGame->GetBalls();
 	for(vector<Ball::SharedPointer>::iterator ball = balls.begin(); ball != balls.end(); ++ball)
@@ -106,6 +116,8 @@ void ModeGame::Draw(SDL_Surface* screenSurface)
 	Vector2i inverted_y = ArkGame::PaddleToGame(paddle);
 	inverted_y.y = 480 - inverted_y.y;
 	StandardTextures::paddle_animation->GetCurrentFrame()->Draw(inverted_y);
+
+	
 }
 
 void ModeGame::clickBack(Widget* /*widget*/)

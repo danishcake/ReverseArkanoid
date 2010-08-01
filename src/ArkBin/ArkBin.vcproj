@@ -451,6 +451,14 @@
 						RelativePath=".\Sprites\Background.png"
 						>
 					</File>
+					<File
+						RelativePath=".\Sprites\RedNumbers.animation"
+						>
+					</File>
+					<File
+						RelativePath=".\GUI\RedNumbers.png"
+						>
+					</File>
 				</Filter>
 			</Filter>
 			<Filter

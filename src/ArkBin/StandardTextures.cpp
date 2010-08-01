@@ -17,6 +17,7 @@ namespace StandardTextures
 	Animation* paddle_animation = 0;
 	Animation* ball_trail_animation = 0;
 	Animation* background_animation = 0;
+	Animation* red_numbers_animation = 0;
 
 	void LoadTextures()
 	{
@@ -107,6 +108,17 @@ namespace StandardTextures
 		} else
 		{
 			Logger::ErrorOut() << "Unable to load background animations\n";
+		}
+
+		AnimationSet* red_numbers_animation_set = SDLTextureManager::GetAnimationSet("RedNumbers.animation");
+		if(background_animation_set)
+		{
+			red_numbers_animation = red_numbers_animation_set->GetAnimation("Numbers");
+			if(!red_numbers_animation)
+				Logger::ErrorOut() << "Unable to load red numbers animation\n";
+		} else
+		{
+			Logger::ErrorOut() << "Unable to load red numbers animations\n";
 		}
 	}
 
