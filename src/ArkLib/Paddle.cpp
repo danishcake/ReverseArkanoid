@@ -17,6 +17,15 @@ void Paddle::Tick(float timespan, std::vector<Ball::SharedPointer> balls, Wall::
 {
 	float target_x;
 	float target_dx;
+	float edge_offset;
+
+	if(wall.get())
+	{
+		float wall_x = wall->GetPosition().x + 64;
+		edge_offset = -(wall_x - (mPosition.x + mSize.x / 2)) * 0.5f;
+		if(edge_offset < -30) edge_offset = -30;
+		if(edge_offset > 30) edge_offset = 30;
+	}
 
 	if(balls.size() > 0)
 	{
@@ -38,7 +47,7 @@ void Paddle::Tick(float timespan, std::vector<Ball::SharedPointer> balls, Wall::
 				ball = *it;
 			}
 		}
-		target_x = ball->GetPosition().x - mSize.x / 2;
+		target_x = ball->GetPosition().x - mSize.x / 2 + edge_offset;
 		target_dx = ball->GetVelocity().x;
 	} else
 	{ //Wander to the centre slowly

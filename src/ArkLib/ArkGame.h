@@ -44,6 +44,7 @@ private:
 	std::vector<Ball::SharedPointer> mBalls;
 	Paddle::SharedPointer mPaddle;
 	int mScore;
+	int mBounces;
 
 //Public getters/setters
 public:

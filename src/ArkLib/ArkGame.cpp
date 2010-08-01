@@ -8,7 +8,8 @@ ArkGame::ArkGame(void) :
 	mPhase(GamePhase::Starting),
 	mTimer(0),
 	mPaddle(new Paddle()),
-	mScore(0)
+	mScore(0),
+	mBounces(0)
 {
 	mPaddle->SetBounds(mBounds);
 	mPaddle->SetX(mBounds.x / 2 - mPaddle->GetSize().x / 2);
@@ -82,11 +83,20 @@ void ArkGame::TickRunning(float timespan)
 				Vector2f direction = (*ball)->GetVelocity();
 				float magnitude = direction.length();
 				direction.normalize();
-				magnitude += Ball::BOUNCE_ACCELERATION;
+				if(mBounces < 150)
+					magnitude += Ball::BOUNCE_ACCELERATION + (Ball::BOUNCE_ACCELERATION_HIGH - Ball::BOUNCE_ACCELERATION) * ((float)mBounces / 150.0f);
+				else
+					magnitude += Ball::BOUNCE_ACCELERATION_HIGH;
+
 				if(magnitude > Ball::MAXIMUM_SPEED)
 				{
 					Vector2f split_direction;
-					magnitude = Ball::INITIAL_SPEED;
+
+					if(mBounces < 100)
+						magnitude = Ball::INITIAL_SPEED + (Ball::MAXIMUM_SPEED - Ball::INITIAL_SPEED) * ((float)mBounces) / 120.0f;
+					else
+						magnitude = Ball::MAXIMUM_SPEED / 1.2f;
+
 					if(direction.x < 0)
 						direction.x -= 0.2f;
 					else
@@ -108,6 +118,7 @@ void ArkGame::TickRunning(float timespan)
 				//Scoring
 				if(mWall.get())
 					mScore += static_cast<int>(mWall->GetBricks().size()) * BOUNCE_POINTS;
+				mBounces++;
 			}
 		} else
 		{

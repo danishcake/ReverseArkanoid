@@ -22,6 +22,7 @@ public:
 	static const int DEFAULT_BOUNDS_H = 480;
 	static const int INITIAL_RADIUS = 16;
 	static const int BOUNCE_ACCELERATION = 25;
+	static const int BOUNCE_ACCELERATION_HIGH = 75;
 	static const int MAXIMUM_SPEED = 400;
 	static const int TRAIL_LENGTH = 5;
 	static const int TRAIL_SEGMENT_TIME = 30; //ms
