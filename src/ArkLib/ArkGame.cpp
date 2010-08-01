@@ -44,10 +44,10 @@ void ArkGame::TickRunning(float timespan)
 				float collision_distance = Collisions2f::PolygonPointDistance(brick_bounds, 4, BallToGame(*ball), collision_point);
 				if(collision_distance < (*ball)->GetRadius())
 				{
-					mSoundsDue.push_back("BrickBounce.wav");
 					Vector2f outward_vector = BallToGame(*ball) - collision_point;
 					if(!(*ball)->GetOverlapping())
 					{
+						mSoundsDue.push_back("BrickBounce.wav");
 						(*ball)->Bounce(outward_vector);
 						(*ball)->SetOverlapping(true);
 						(*brick)->Hit();
