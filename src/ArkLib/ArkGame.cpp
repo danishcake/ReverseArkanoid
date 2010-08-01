@@ -149,7 +149,7 @@ void ArkGame::TickRunning(float timespan)
 
 	if(mBalls.size() == 0)
 	{
-		mPhase == GamePhase::BallLost;
+		mPhase = GamePhase::BallLost;
 		mScore += 500;
 	}
 }

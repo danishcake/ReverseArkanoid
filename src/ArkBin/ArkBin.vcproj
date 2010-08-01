@@ -81,7 +81,7 @@
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\lib&quot;;&quot;$(SolutionDir)/lib/$(ConfigurationName)&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\lib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0\lib&quot;;&quot;$(PROGRAMFILES)\tinyxml\Debug_STL&quot;;&quot;$(PROGRAMFILES)\SDL_mixer-1.2.8\lib&quot;"
 				GenerateDebugInformation="true"
-				SubSystem="1"
+				SubSystem="2"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -170,7 +170,7 @@
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\lib&quot;;&quot;$(SolutionDir)/lib/$(ConfigurationName)&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\lib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0\lib&quot;;&quot;$(PROGRAMFILES)\tinyxml\Release_STL&quot;;&quot;$(PROGRAMFILES)\SDL_mixer-1.2.8\lib&quot;"
 				GenerateDebugInformation="true"
-				SubSystem="1"
+				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
@@ -592,7 +592,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Copying DLL $(InputFileName)"
-						CommandLine="copy /Y &quot;$(InputPath)&quot; &quot;$(OutDir)\$(InputFileName)&quot;"
+						CommandLine="copy /Y &quot;$(InputPath)&quot; &quot;$(OutDir)\$(InputFileName)&quot;&#x0D;&#x0A;"
 						Outputs="$(OutDir)\$(InputFileName)"
 					/>
 				</FileConfiguration>
@@ -602,7 +602,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Copying DLL $(InputFileName)"
-						CommandLine="copy /Y &quot;$(InputPath)&quot; &quot;$(OutDir)\$(InputFileName)&quot;"
+						CommandLine="copy /Y &quot;$(InputPath)&quot; &quot;$(OutDir)\$(InputFileName)&quot;&#x0D;&#x0A;"
 						Outputs="$(OutDir)\$(InputFileName)"
 					/>
 				</FileConfiguration>

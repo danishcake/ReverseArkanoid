@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <sdl.h>
 #include <ctime>
 #include <vmath.h>
 #include <Widget.h>
@@ -11,9 +12,10 @@ const float targetFrameTime = 0.02f;
 IMode* gameMode = NULL;
 
 
-SDL_Surface* SDL_init()
+SDL_Surface* SDL_init(bool grab_input)
 {
 	SDL_Init(SDL_INIT_VIDEO);
+	SDL_WM_SetCaption("Ark", 0);
 	Vector2i resolution = Vector2i(640, 480);
 	SDL_Surface* p_surface = SDL_SetVideoMode(resolution.x, resolution.y, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 	if(!p_surface)
@@ -26,6 +28,8 @@ SDL_Surface* SDL_init()
 								   "Bitdepth = " << p_surface->format->BitsPerPixel <<"\n" <<
 								   "Hardware = "  << (p_surface->flags & SDL_HWSURFACE ? "true" : "false") << "\n" <<
 								   "Doublebuffered = " << (p_surface->flags & SDL_DOUBLEBUF ? "true" : "false") << "\n";				
+		if(grab_input)
+			SDL_WM_GrabInput(SDL_GRAB_ON);
 	}
 
 	SDL_ShowCursor(0);
@@ -56,21 +60,23 @@ void Draw(SDL_Surface* screenSurface, BlittableRect& screenRect)
 	SDL_Flip(screenSurface);
 }
 
-int _tmain(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
 	bool bFinished = false;
-	SDL_Surface* pScreen = SDL_init();
-	BlittableRect screenRect(pScreen, true);
+	bool bGrab = true;
 
 	for(int arg = 1; arg < argc; arg++)
 	{
 		Logger::DiagnosticOut() << "Command line parameter:" << argv[arg] << "\n";
-		if(!strcmp("-cheat", argv[arg]))
+		if(!strcmp("-nograb", argv[arg]))
 		{
-
+			bGrab = false;
 		}
 	}
 	
+	SDL_Surface* pScreen = SDL_init(bGrab);
+	BlittableRect screenRect(pScreen, true);
+
 	if(pScreen)
 	{
 		SDLAnimationFrame::screen_ = pScreen;

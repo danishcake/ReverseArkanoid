@@ -22,8 +22,8 @@ public:
 	static const int PADDLE_WIDTH = 80;
 	static const int PADDLE_HEIGHT = 20;
 
-	static const int PADDLE_MAX_SPEED = 600;
-	static const int PADDLE_ACCELERATION = 200;
+	static const int PADDLE_MAX_SPEED = 700;
+	static const int PADDLE_ACCELERATION = 240;
 //Constructors
 public:
 	Paddle(void);
