@@ -38,13 +38,13 @@ void ModeMenu::Setup()
 	scrollLeft->SetPosition(newGame->GetPosition() - Vector2i(scrollLeft->GetSize().x + btn_border, 0));
 	scrollLeft->SetText("<", TextAlignment::Centre);
 
-	Widget* loadEditor = new Widget(NinePatch("NavyButton.png", 16, 16, 16, 16), btn_width, btn_height);
-	loadEditor->SetPosition(Vector2i(btn_border, Widget::GetScreenSize().y - btn_height - btn_border));
-	loadEditor->SetText("Editor", TextAlignment::Centre);
-
-	Widget* showOptions = new Widget(NinePatch("NavyButton.png", 16, 16, 16, 16), btn_width, btn_height);
-	showOptions->SetPosition(Vector2i(btn_border * 2 + btn_width, Widget::GetScreenSize().y - btn_height - btn_border));
-	showOptions->SetText("Options", TextAlignment::Centre);
+	Widget* explainGame = new Widget(NinePatch("NavyButton.png", 16, 16, 16, 16), btn_width * 2 + btn_border, btn_height * 2);
+	explainGame->SetPosition(Vector2i(btn_border, Widget::GetScreenSize().y - btn_height * 2 - btn_border));
+	explainGame->SetTextSize(TextSize::Small);
+	explainGame->SetTextWrap(true);
+	explainGame->SetText("You cannot move the paddle, but you can move the wall. Keep the bricks alive by dodging the balls. You score 10 points for each brick left on every bounce", TextAlignment::Centre);
+	explainGame->SetRejectsFocus(true);
+	explainGame->SetHidesHighlight(true);
 
 	Widget* exitGame = new Widget(NinePatch("NavyButton.png", 16, 16, 16, 16), btn_width, btn_height);
 	exitGame->SetPosition(Vector2i(btn_border * 3 + btn_width * 2, Widget::GetScreenSize().y +  - btn_height - btn_border));
@@ -56,19 +56,13 @@ void ModeMenu::Setup()
 	mFeedbackWidget = new FeedbackWidget();
 
 	
-	scrollLeft->LinkDown(showOptions);
+	scrollLeft->LinkDown(exitGame);
 	scrollLeft->LinkRight(newGame);
 	newGame->LinkLeft(scrollLeft);
-	newGame->LinkDown(showOptions);
+	newGame->LinkDown(exitGame);
 	newGame->LinkRight(scrollRight);
 	scrollRight->LinkLeft(newGame);
-	scrollRight->LinkDown(showOptions);
-	loadEditor->LinkUp(newGame);
-	loadEditor->LinkRight(showOptions);
-	showOptions->LinkLeft(loadEditor);
-	showOptions->LinkUp(newGame);
-	showOptions->LinkRight(exitGame);
-	exitGame->LinkLeft(showOptions);
+	scrollRight->LinkDown(exitGame);
 	exitGame->LinkUp(newGame);
 
 	//Attach callback
