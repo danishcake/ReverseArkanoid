@@ -197,6 +197,10 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Sound"
+				>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -262,6 +266,10 @@
 					RelativePath=".\TextureManager.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="Sounds"
+				>
 			</Filter>
 		</Filter>
 	</Files>

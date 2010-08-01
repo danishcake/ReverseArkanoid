@@ -44,6 +44,7 @@ void ArkGame::TickRunning(float timespan)
 				float collision_distance = Collisions2f::PolygonPointDistance(brick_bounds, 4, BallToGame(*ball), collision_point);
 				if(collision_distance < (*ball)->GetRadius())
 				{
+					mSoundsDue.push_back("BrickBounce.wav");
 					Vector2f outward_vector = BallToGame(*ball) - collision_point;
 					if(!(*ball)->GetOverlapping())
 					{
@@ -75,6 +76,8 @@ void ArkGame::TickRunning(float timespan)
 		{
 			if(!(*ball)->GetOverlappingPaddle())
 			{
+				mSoundsDue.push_back("BatBounce.wav");
+
 				const Vector2f down_bias(0, -300); //Increasing this makes bounces more vertically biased
 				
 				(*ball)->Bounce(PaddleToGame(mPaddle) - paddle_collision_point + down_bias);
@@ -90,6 +93,7 @@ void ArkGame::TickRunning(float timespan)
 
 				if(magnitude > Ball::MAXIMUM_SPEED)
 				{
+					mSoundsDue.push_back("BallSplit.wav");
 					Vector2f split_direction;
 
 					if(mBounces < 100)
@@ -135,6 +139,11 @@ void ArkGame::TickRunning(float timespan)
 		int ball_count = static_cast<int>(mBalls.size());
 		mBalls.erase(std::remove_if(mBalls.begin(), mBalls.end(), Ball::IsRemovable), mBalls.end());
 		mScore += static_cast<int>(mWall->GetBricks().size()) * BOUNCE_POINTS * BALL_POINTS * (ball_count - mBalls.size());
+		if(ball_count > mBalls.size())
+		{
+			mSoundsDue.push_back("BallLost.wav");
+		}
+
 	}
 	mPaddle->Tick(timespan, mBalls, mWall);
 
@@ -218,4 +227,11 @@ Vector2f ArkGame::BrickToGame(Brick::SharedPointer brick, Wall::SharedPointer wa
 Vector2f ArkGame::PaddleToGame(Paddle::SharedPointer paddle)
 {
 	return paddle->GetPosition() + Vector2f((640 - paddle->GetBounds().x) / 2.0, 0) + Vector2f(paddle->GetSize().x / 2, -paddle->GetSize().y / 2);
+}
+
+std::vector<std::string> ArkGame::GetSoundsDue()
+{
+	std::vector<std::string> sounds_copy = mSoundsDue;
+	mSoundsDue.clear();
+	return sounds_copy;
 }

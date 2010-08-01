@@ -45,6 +45,7 @@ private:
 	Paddle::SharedPointer mPaddle;
 	int mScore;
 	int mBounces;
+	std::vector<std::string> mSoundsDue;
 
 //Public getters/setters
 public:
@@ -58,6 +59,8 @@ public:
 
 	void AddBall(Ball::SharedPointer ball);
 	const std::vector<Ball::SharedPointer> GetBalls() const {return mBalls;}
+
+	std::vector<std::string> GetSoundsDue();
 
 	Paddle::SharedPointer GetPaddle() const {return mPaddle;}
 

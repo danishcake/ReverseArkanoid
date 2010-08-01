@@ -29,14 +29,17 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="Animation xml copier"
+				Name="Animation png copier"
 			/>
 			<Tool
-				Name="Animation png copier"
+				Name="Sounds copier"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 				CommandLine=""
+			/>
+			<Tool
+				Name="Animation xml copier"
 			/>
 			<Tool
 				Name="Level copier"
@@ -53,7 +56,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\include&quot;;&quot;$(SolutionDir)/src/ArkLib&quot;;&quot;$(SolutionDir)/src/SDLGUIlib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\include&quot;;&quot;$(SolutionDir)/src/ArkLib&quot;;&quot;$(SolutionDir)/src/SDLGUIlib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\include&quot;;&quot;$(PROGRAMFILES)\SDL_mixer-1.2.8\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -74,9 +77,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="tinyxmld_STL.lib"
+				AdditionalDependencies="tinyxmld_STL.lib SDL_mixer.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\lib&quot;;&quot;$(SolutionDir)/lib/$(ConfigurationName)&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\lib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0\lib&quot;;&quot;$(PROGRAMFILES)\tinyxml\Debug_STL&quot;"
+				AdditionalLibraryDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\lib&quot;;&quot;$(SolutionDir)/lib/$(ConfigurationName)&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\lib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0\lib&quot;;&quot;$(PROGRAMFILES)\tinyxml\Debug_STL&quot;;&quot;$(PROGRAMFILES)\SDL_mixer-1.2.8\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -118,14 +121,17 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="Animation xml copier"
+				Name="Animation png copier"
 			/>
 			<Tool
-				Name="Animation png copier"
+				Name="Sounds copier"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 				CommandLine=""
+			/>
+			<Tool
+				Name="Animation xml copier"
 			/>
 			<Tool
 				Name="Level copier"
@@ -141,7 +147,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\include&quot;;&quot;$(SolutionDir)/src/ArkLib&quot;;&quot;$(SolutionDir)/src/SDLGUIlib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\include&quot;;&quot;$(SolutionDir)/src/ArkLib&quot;;&quot;$(SolutionDir)/src/SDLGUIlib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\include&quot;;&quot;$(PROGRAMFILES)\SDL_mixer-1.2.8\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -160,9 +166,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="tinyxml_STL.lib"
+				AdditionalDependencies="tinyxml_STL.lib SDL_mixer.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\lib&quot;;&quot;$(SolutionDir)/lib/$(ConfigurationName)&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\lib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0\lib&quot;;&quot;$(PROGRAMFILES)\tinyxml\Release_STL&quot;"
+				AdditionalLibraryDirectories="&quot;$(PROGRAMFILES)\SDL-1.2.12\lib&quot;;&quot;$(SolutionDir)/lib/$(ConfigurationName)&quot;;&quot;$(PROGRAMFILES)\SDL_image-1.2.6\lib&quot;;&quot;$(PROGRAMFILES)\boost\boost_1_36_0\lib&quot;;&quot;$(PROGRAMFILES)\tinyxml\Release_STL&quot;;&quot;$(PROGRAMFILES)\SDL_mixer-1.2.8\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -209,6 +215,10 @@
 			</File>
 			<File
 				RelativePath=".\Main.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SoundManager.cpp"
 				>
 			</File>
 			<File
@@ -275,6 +285,10 @@
 			>
 			<File
 				RelativePath=".\FeedbackWidget.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SoundManager.h"
 				>
 			</File>
 			<File
@@ -473,6 +487,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Sounds"
+				>
+				<File
+					RelativePath=".\Sounds\BallLost.wav"
+					>
+				</File>
+				<File
+					RelativePath=".\Sounds\BallSplit.wav"
+					>
+				</File>
+				<File
+					RelativePath=".\Sounds\BatBounce.wav"
+					>
+				</File>
+				<File
+					RelativePath=".\Sounds\BrickBounce.wav"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="DLLs"
@@ -545,6 +579,30 @@
 						Name="VCCustomBuildTool"
 						Description="Copying DLL $(InputFileName)"
 						CommandLine="copy /Y &quot;$(InputPath)&quot; &quot;$(OutDir)\$(InputFileName)&quot;&#x0D;&#x0A;"
+						Outputs="$(OutDir)\$(InputFileName)"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\DLLs\SDL_mixer.dll"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Copying DLL $(InputFileName)"
+						CommandLine="copy /Y &quot;$(InputPath)&quot; &quot;$(OutDir)\$(InputFileName)&quot;"
+						Outputs="$(OutDir)\$(InputFileName)"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Copying DLL $(InputFileName)"
+						CommandLine="copy /Y &quot;$(InputPath)&quot; &quot;$(OutDir)\$(InputFileName)&quot;"
 						Outputs="$(OutDir)\$(InputFileName)"
 					/>
 				</FileConfiguration>

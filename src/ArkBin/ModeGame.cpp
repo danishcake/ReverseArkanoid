@@ -5,6 +5,7 @@
 #include "FeedbackWidget.h"
 #include "StandardTextures.h"
 #include <boost/lexical_cast.hpp>
+#include "SoundManager.h"
 
 using std::vector;
 
@@ -43,6 +44,12 @@ ModeAction::Enum ModeGame::Tick(float dt)
 	if(!mFeedbackWidget->HasModal())
 	{
 		mGame->Tick(dt);
+
+		std::vector<std::string> sounds_due = mGame->GetSoundsDue();
+		for(std::vector<std::string>::iterator it = sounds_due.begin(); it != sounds_due.end(); ++it)
+		{
+			SoundManager::Instance().PlaySample(*it);
+		}
 
 		ModeAction::Enum result = IMode::Tick(dt);
 		Widget::SetFade(mFade);
